@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root { color-scheme: light; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
+<title>WonderBox</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&family=Poppins:wght@600;700&display=swap">
+<style>
+/* Layout concept: a sky-blue storybook page where tilted pastel cards sit like parcels on a shelf.
+   Palette: sky, cardboard brown, and four pastel parcel tones. Type: Poppins display (matches the logo wordmark), Nunito body. */
+:root {
+  --bg: #f5f8fb;
+  --bg-alt: #e8f0f7;
+  --surface: #ffffff;
+  --ink: #2b2420;
+  --ink-soft: #5b544e;
+  --brand: #6f5844;
+  --brand-ink: #ffffff;
+  --line: #d3dde7;
+  --outline: #2b2420;
+  --focus: #1d5fd1;
+  --hdr: rgba(245, 248, 251, 0.88);
+  --sky-top: #86bce6;
+  --sky-bottom: #dcedf9;
+  --hero-ink: #2b2420;
+  --hero-soft: #3f3832;
+  --pill-bg: rgba(255, 255, 255, 0.6);
+  --cloud: #ffffff;
+  --cloud-op: 0.92;
+  --star-op: 0;
+  --sage: #d5e7d0;
+  --sky-card: #cddff4;
+  --butter: #f6e6b9;
+  --blush: #f5d8cd;
+  --card-ink: #2b2420;
+  --paper: #ffffff;
+  --paper-ink: #6f5844;
+  --shadow: 0 18px 36px -14px rgba(43, 36, 32, 0.35);
+  --display: "Poppins", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "Nunito", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101923;
+    --bg-alt: #152231;
+    --surface: #1b2a3b;
+    --ink: #f3ede7;
+    --ink-soft: #bab4ad;
+    --brand: #e6c9a2;
+    --brand-ink: #2b2420;
+    --line: #2f3e50;
+    --outline: #a99f95;
+    --focus: #8ec5ff;
+    --hdr: rgba(16, 25, 35, 0.88);
+    --sky-top: #0d1830;
+    --sky-bottom: #27406a;
+    --hero-ink: #f6f0ea;
+    --hero-soft: #d4ddea;
+    --pill-bg: rgba(255, 255, 255, 0.1);
+    --cloud: #5d7fb0;
+    --cloud-op: 0.3;
+    --star-op: 0.9;
+    --sage: #2e4636;
+    --sky-card: #2a3f5e;
+    --butter: #574a25;
+    --blush: #5a3b34;
+    --card-ink: #f3ede7;
+    --shadow: 0 18px 36px -14px rgba(0, 0, 0, 0.7);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #101923;
+  --bg-alt: #152231;
+  --surface: #1b2a3b;
+  --ink: #f3ede7;
+  --ink-soft: #bab4ad;
+  --brand: #e6c9a2;
+  --brand-ink: #2b2420;
+  --line: #2f3e50;
+  --outline: #a99f95;
+  --focus: #8ec5ff;
+  --hdr: rgba(16, 25, 35, 0.88);
+  --sky-top: #0d1830;
+  --sky-bottom: #27406a;
+  --hero-ink: #f6f0ea;
+  --hero-soft: #d4ddea;
+  --pill-bg: rgba(255, 255, 255, 0.1);
+  --cloud: #5d7fb0;
+  --cloud-op: 0.3;
+  --star-op: 0.9;
+  --sage: #2e4636;
+  --sky-card: #2a3f5e;
+  --butter: #574a25;
+  --blush: #5a3b34;
+  --card-ink: #f3ede7;
+  --shadow: 0 18px 36px -14px rgba(0, 0, 0, 0.7);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 60;
+  background: var(--hdr);
+}
+h1, h2, h3 { font-family: var(--display); margin: 0; text-wrap: balance; }
+h2 { font-weight: 700; font-size: clamp(28px, 4vw, 42px); line-height: 1.12; }
+h3 { font-weight: 600; font-size: 21px; line-height: 1.25; }
+p { margin: 0; }
+a { color: inherit; }
+img { display: block; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
+section[id] { scroll-margin-top: 64px; }
+
+.wrap {
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.band { padding-block: clamp(56px, 8vw, 104px); }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 13px 24px; border-radius: 999px; border: 2px solid transparent;
+  font: 600 16px/1 var(--display); text-decoration: none; cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-primary { background: var(--brand); color: var(--brand-ink); }
+.btn-ghost { border-color: var(--hero-ink); color: var(--hero-ink); }
+.btn-inverse { background: var(--brand-ink); color: var(--brand); }
+.btn[aria-disabled="true"] { opacity: 0.75; cursor: default; }
+.btn[aria-disabled="true"]:hover { transform: none; }
+
+/* Header */
+.site-header {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50;
+  background: var(--hdr); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--brand); font: 700 21px/1 var(--display); }
+.brand img { width: 40px; height: 40px; padding: 3px; border-radius: 12px; background: var(--paper); object-fit: contain; }
+.nav { display: flex; align-items: center; gap: 4px; }
+.nav .link { padding: 8px 12px; border-radius: 999px; color: var(--ink-soft); text-decoration: none; font-weight: 600; font-size: 15px; }
+.nav .link:hover { color: var(--ink); background: var(--bg-alt); }
+.nav .btn { padding: 10px 20px; font-size: 15px; margin-left: 8px; }
+@media (max-width: 800px) { .nav .link { display: none; } .nav .btn { margin-left: 0; } }
+
+/* Hero */
+.hero { position: relative; overflow: hidden; color: var(--hero-ink); background: linear-gradient(180deg, var(--sky-top), var(--sky-bottom)); }
+.hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: var(--star-op);
+  background-image:
+    radial-gradient(1.6px 1.6px at 8% 18%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 17% 62%, #fff, transparent),
+    radial-gradient(1.8px 1.8px at 29% 30%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 41% 80%, #fff, transparent),
+    radial-gradient(1.6px 1.6px at 55% 14%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 63% 52%, #fff, transparent),
+    radial-gradient(1.8px 1.8px at 78% 24%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 88% 70%, #fff, transparent),
+    radial-gradient(1.6px 1.6px at 94% 12%, #fff, transparent);
+}
+.cloud { position: absolute; width: var(--w); color: var(--cloud); opacity: var(--cloud-op); pointer-events: none; animation: drift var(--t) ease-in-out infinite alternate; }
+.cloud svg { display: block; width: 100%; height: auto; fill: currentColor; }
+.c1 { --w: 230px; --t: 26s; top: 7%; left: -3%; }
+.c2 { --w: 280px; --t: 32s; top: 58%; right: -4%; }
+.c3 { --w: 150px; --t: 22s; top: 22%; left: 47%; }
+@keyframes drift { from { transform: translateX(-4%); } to { transform: translateX(8%); } }
+.hero-grid {
+  position: relative; z-index: 1; display: grid; align-items: center; gap: clamp(32px, 6vw, 72px);
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  padding-block: clamp(44px, 7vw, 92px) clamp(56px, 8vw, 110px);
+}
+.pill { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; background: var(--pill-bg); border: 1px solid var(--hero-soft); font-weight: 800; font-size: 14px; }
+.pill i { width: 8px; height: 8px; border-radius: 50%; background: #3fa66b; }
+.hero h1 { font-weight: 700; font-size: clamp(38px, 6.2vw, 68px); line-height: 1.04; margin-top: 20px; }
+.lede { margin-top: 20px; max-width: 34em; font-size: clamp(18px, 2vw, 21px); color: var(--hero-soft); }
+.cta-row { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 12px; }
+.hero-card {
+  position: relative; margin: 0 auto; width: 100%; max-width: 440px; padding: 18px 18px 14px;
+  background: var(--paper); border-radius: 28px; box-shadow: var(--shadow);
+  transform: rotate(2.5deg); animation: float 7s ease-in-out infinite alternate;
+}
+.hero-card::before {
+  content: ""; position: absolute; top: -14px; left: 50%; width: 120px; height: 30px; margin-left: -60px;
+  background: var(--butter); opacity: 0.95; border-radius: 4px; transform: rotate(-3deg);
+}
+.hero-card img { width: 100%; height: auto; aspect-ratio: 1 / 1; }
+.hero-card figcaption { margin-top: 6px; text-align: center; color: var(--paper-ink); font: 600 13px/1.3 var(--display); letter-spacing: 0.1em; text-transform: uppercase; }
+@keyframes float { from { transform: rotate(2.5deg) translateY(0); } to { transform: rotate(1.5deg) translateY(-8px); } }
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr); }
+  .hero-card { max-width: 340px; }
+}
+
+/* Ribbon */
+.ribbon { overflow: hidden; background: var(--brand); color: var(--brand-ink); padding-block: 14px; }
+.ribbon-track { display: flex; width: max-content; animation: scroll 38s linear infinite; }
+.ribbon-set { display: flex; align-items: center; flex-shrink: 0; }
+.ribbon-set span { font: 600 14px/1 var(--display); letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
+.ribbon-set i { width: 7px; height: 7px; margin-inline: 28px; border-radius: 50%; background: currentColor; opacity: 0.7; }
+@keyframes scroll { to { transform: translateX(-50%); } }
+
+/* Stats */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 26px; overflow: hidden; }
+.stat { padding: 26px 28px; border-right: 1px solid var(--line); }
+.stat:last-child { border-right: 0; }
+.stat b { display: block; font: 700 clamp(34px, 4.4vw, 48px)/1 var(--display); color: var(--brand); font-variant-numeric: tabular-nums; }
+.stat span { display: block; margin-top: 8px; color: var(--ink-soft); font-weight: 600; }
+@media (max-width: 620px) { .stat { border-right: 0; border-bottom: 1px solid var(--line); } .stat:last-child { border-bottom: 0; } }
+
+.serving { margin-top: 22px; text-align: center; color: var(--ink-soft); font-weight: 600; }
+
+/* Story */
+.split { display: grid; gap: clamp(28px, 5vw, 64px); grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; }
+.split > .lead { position: sticky; top: 96px; }
+.lead p { margin-top: 16px; color: var(--ink-soft); font-size: 18px; max-width: 26em; }
+.story p + p { margin-top: 18px; }
+.story p { font-size: 19px; max-width: 34em; }
+@media (max-width: 900px) { .split { grid-template-columns: minmax(0, 1fr); } .split > .lead { position: static; } }
+
+/* What we do */
+.alt { background: var(--bg-alt); }
+.do-grid { display: grid; gap: 22px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.tilt {
+  display: flex; flex-direction: column; gap: 12px; padding: 26px; border-radius: 26px;
+  background: var(--tone); color: var(--card-ink); border: 2px solid var(--outline);
+  transform: rotate(var(--r, 0deg)); transition: transform 0.25s ease;
+}
+.tilt:hover, .tilt:focus-within { transform: rotate(0deg) translateY(-4px); }
+.tilt p { font-size: 16.5px; }
+.tilt .more { margin-top: auto; padding-top: 6px; font-weight: 800; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.do-grid .tilt:nth-child(even) { margin-top: 28px; }
+.do-grid .tilt:nth-child(1) { --r: -1.4deg; }
+.do-grid .tilt:nth-child(2) { --r: 1.2deg; }
+.do-grid .tilt:nth-child(3) { --r: 1deg; }
+.do-grid .tilt:nth-child(4) { --r: -1.2deg; }
+[data-tone="sage"] { --tone: var(--sage); }
+[data-tone="sky"] { --tone: var(--sky-card); }
+[data-tone="butter"] { --tone: var(--butter); }
+[data-tone="blush"] { --tone: var(--blush); }
+@media (max-width: 560px) { .do-grid { grid-template-columns: minmax(0, 1fr); } .do-grid .tilt:nth-child(even) { margin-top: 0; } }
+
+/* Inside a box */
+.sec-head { max-width: 40em; }
+.sec-head p { margin-top: 14px; color: var(--ink-soft); font-size: 18px; }
+.tabs { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; }
+.tab {
+  padding: 12px 20px; border-radius: 999px; border: 2px solid var(--outline); cursor: pointer;
+  background: var(--surface); color: var(--ink); font: 600 16px/1 var(--display);
+}
+.tab[aria-selected="true"] { background: var(--brand); border-color: var(--brand); color: var(--brand-ink); }
+.panel {
+  margin-top: 20px; display: grid; gap: 28px; align-items: center;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  padding: clamp(24px, 4vw, 44px); border-radius: 30px;
+  background: var(--tone); color: var(--card-ink); border: 2px solid var(--outline);
+}
+.panel .who { font: 600 15px/1 var(--display); letter-spacing: 0.1em; text-transform: uppercase; }
+.panel .age { margin-top: 10px; font: 700 clamp(40px, 6vw, 68px)/1 var(--display); }
+.panel p { margin-top: 14px; font-size: 18px; max-width: 24em; }
+.chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.chips li { padding: 10px 16px; border-radius: 16px; background: var(--surface); color: var(--ink); border: 2px solid var(--outline); font-weight: 800; }
+.note { margin-top: 16px; font-size: 14.5px; color: var(--ink-soft); }
+@media (max-width: 760px) { .panel { grid-template-columns: minmax(0, 1fr); } }
+
+/* How it works */
+.steps { list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 22px; counter-reset: step; }
+.steps li { position: relative; padding-left: 62px; counter-increment: step; }
+.steps li::before {
+  content: counter(step); position: absolute; left: 0; top: 0; width: 44px; height: 44px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--brand); color: var(--brand-ink); font: 700 18px/1 var(--display);
+}
+.steps h3 { font-size: 20px; }
+.steps p { margin-top: 4px; color: var(--ink-soft); }
+.give { background: var(--surface); border: 1px solid var(--line); border-radius: 28px; padding: clamp(24px, 3.5vw, 40px); box-shadow: var(--shadow); }
+.give h3 { font-size: 24px; }
+.give dl { margin: 20px 0 0; display: grid; gap: 18px; }
+.give dt { font: 600 17px/1.3 var(--display); }
+.give dd { margin: 4px 0 0; color: var(--ink-soft); }
+.give .free { margin-top: 24px; padding: 14px 18px; border-radius: 16px; background: var(--sage); color: var(--card-ink); font-weight: 800; }
+
+/* Ways to help */
+.help-grid { margin-top: 32px; display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+.help { display: flex; flex-direction: column; gap: 10px; padding: 26px; border-radius: 22px; background: var(--surface); border: 1px solid var(--line); }
+.help p { color: var(--ink-soft); font-size: 16.5px; }
+.help .more { margin-top: auto; padding-top: 8px; font-weight: 800; color: var(--brand); text-underline-offset: 4px; text-decoration-thickness: 2px; }
+.contact-note { margin-top: 22px; color: var(--ink-soft); }
+
+/* Mission */
+.mission { background: linear-gradient(180deg, var(--sky-bottom), var(--sky-top)); color: var(--hero-ink); }
+.mission .label { font: 600 14px/1 var(--display); letter-spacing: 0.14em; text-transform: uppercase; }
+.mission blockquote { margin: 20px 0 0; max-width: 24em; font: 600 clamp(26px, 3.8vw, 44px)/1.22 var(--display); text-wrap: balance; }
+
+/* Donate */
+.donate { padding: clamp(32px, 6vw, 72px); border-radius: 34px; background: var(--brand); color: var(--brand-ink); }
+.donate h2 { color: inherit; max-width: 14em; }
+.donate p { margin-top: 16px; max-width: 34em; font-size: 19px; }
+.donate .btn { margin-top: 28px; }
+
+/* Footer */
+.site-footer { background: var(--bg-alt); border-top: 1px solid var(--line); padding-block: 40px; }
+.foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; }
+.foot p { color: var(--ink-soft); font-size: 15px; max-width: 34em; }
+.foot nav { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.foot nav a { color: var(--ink-soft); font-weight: 600; text-decoration: none; }
+.foot nav a:hover { color: var(--ink); text-decoration: underline; }
+.copy { margin-top: 24px; color: var(--ink-soft); font-size: 14px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .cloud, .hero-card, .ribbon-track { animation: none; }
+  .tilt, .btn { transition: none; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="cloud" viewBox="0 0 200 100">
+    <circle cx="60" cy="62" r="28"/><circle cx="100" cy="46" r="36"/><circle cx="142" cy="62" r="26"/>
+    <rect x="34" y="62" width="134" height="28" rx="14"/>
+  </symbol>
+</svg>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="WonderBox home">
+      <img src="wonderbox-logo.png" alt="" width="40" height="40">
+      <span>WonderBox</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a class="link" href="#story">Our story</a>
+      <a class="link" href="#what">What we do</a>
+      <a class="link" href="#inside">Inside a box</a>
+      <a class="link" href="#help">Ways to help</a>
+      <a class="link" href="about.html">About us</a>
+      <a class="btn btn-primary js-donate" href="#donate">Donate</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="cloud c1" aria-hidden="true"><svg viewBox="0 0 200 100"><use href="#cloud"/></svg></div>
+    <div class="cloud c2" aria-hidden="true"><svg viewBox="0 0 200 100"><use href="#cloud"/></svg></div>
+    <div class="cloud c3" aria-hidden="true"><svg viewBox="0 0 200 100"><use href="#cloud"/></svg></div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="pill"><i></i>A student-run nonprofit in Connecticut</span>
+        <h1>A little wonder for kids in the hospital.</h1>
+        <p class="lede">WonderBox delivers free care packages to hospitalized children. Every box is built for the child's age, so it holds something they actually want.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary js-donate" href="#donate">Donate</a>
+          <a class="btn btn-ghost" href="#story">Read our story</a>
+        </div>
+      </div>
+      <figure class="hero-card">
+        <img src="wonderbox-logo.png" alt="Illustration of an open box filled with a teddy bear, building blocks, a heart card, and a pencil, under a rainbow and clouds" width="800" height="800">
+        <figcaption>Care packages for hospitalized children</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="ribbon" aria-hidden="true">
+    <div class="ribbon-track">
+      <div class="ribbon-set"><span>Free to every family</span><i></i><span>Built by high school students</span><i></i><span>Made for every age</span><i></i><span>One box at a time</span><i></i></div>
+      <div class="ribbon-set"><span>Free to every family</span><i></i><span>Built by high school students</span><i></i><span>Made for every age</span><i></i><span>One box at a time</span><i></i></div>
+    </div>
+  </div>
+
+  <section class="band" style="padding-bottom: 0;">
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat"><b>3</b><span>age groups, each with its own box</span></div>
+        <div class="stat"><b>$0</b><span>cost to every family</span></div>
+        <div class="stat"><b>100%</b><span>run by high school students</span></div>
+      </div>
+      <p class="serving">Made for children at Connecticut Children's in Hartford and Yale New Haven Children's Hospital.</p>
+    </div>
+  </section>
+
+  <section class="band" id="story">
+    <div class="wrap split">
+      <div class="lead">
+        <h2>Why we started WonderBox</h2>
+        <p>It began in hospital hallways, with a group of friends who kept noticing the same thing.</p>
+      </div>
+      <div class="story">
+        <p>We are a group of high school students. During the school year and through our summers, we volunteered in hospitals.</p>
+        <p>What stayed with us was how hard these stays can be on children. They are away from home, their friends, and everything familiar, often for days or weeks at a time. Medicine takes care of the illness. Nobody has much time to take care of the child's spirits.</p>
+        <p>So we decided to do something about it together. We started WonderBox to give hospitalized kids something that is just for them. It is a care package built for their age, delivered free, and a reminder that people they have never met are thinking of them.</p>
+        <p><a class="btn btn-primary" href="about.html">Meet the team</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="what">
+    <div class="wrap split">
+      <div class="lead">
+        <h2>What we do</h2>
+        <p>Everything is free to families and run by students.</p>
+      </div>
+      <div class="do-grid">
+        <article class="tilt" data-tone="sage">
+          <h3>Boxes made for each age</h3>
+          <p>Every box is built for one of three age groups, so a toddler and a teenager each get something they actually want.</p>
+          <a class="more" href="#inside">See what's inside</a>
+        </article>
+        <article class="tilt" data-tone="sky">
+          <h3>Gathering the good stuff</h3>
+          <p>We raise money and collect toys, games, books, and comfort items to fill the boxes.</p>
+          <a class="more" href="#donate">Support the drive</a>
+        </article>
+        <article class="tilt" data-tone="butter">
+          <h3>Packed with care</h3>
+          <p>We sort, pack, and check every box ourselves before it goes out.</p>
+          <a class="more" href="#how">See how it works</a>
+        </article>
+        <article class="tilt" data-tone="blush">
+          <h3>Delivered for free</h3>
+          <p>Boxes go to children in the hospital, and their families never pay anything.</p>
+          <a class="more" href="#help">Ways to help</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="inside">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Three boxes for three ages</h2>
+        <p>A four-year-old and a sixteen-year-old do not want the same thing. Pick an age group to see what goes inside.</p>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Age groups">
+        <button class="tab" role="tab" id="t-toddler" aria-selected="true" aria-controls="p-toddler" type="button">Toddlers</button>
+        <button class="tab" role="tab" id="t-school" aria-selected="false" aria-controls="p-school" type="button" tabindex="-1">School-age</button>
+        <button class="tab" role="tab" id="t-teen" aria-selected="false" aria-controls="p-teen" type="button" tabindex="-1">Teens</button>
+      </div>
+
+      <div class="panel" id="p-toddler" role="tabpanel" aria-labelledby="t-toddler" data-tone="sage">
+        <div>
+          <div class="who">Toddlers</div>
+          <div class="age">Ages 2 to 5</div>
+          <p>Soft, bright, and easy to hold. Comfort comes first for the youngest patients.</p>
+        </div>
+        <ul class="chips">
+          <li>Mini Play-Doh</li><li>4-pack of crayons with coloring sheets</li><li>Board book or sticker book</li><li>Chunky puzzle or stacking cups</li><li>Bath toy or soft block</li>
+        </ul>
+      </div>
+      <div class="panel" id="p-school" role="tabpanel" aria-labelledby="t-school" data-tone="sky" hidden>
+        <div>
+          <div class="who">School-age</div>
+          <div class="age">Ages 6 to 12</div>
+          <p>Things to build, draw, and puzzle over, so long afternoons have something to do.</p>
+        </div>
+        <ul class="chips">
+          <li>4-pack of crayons or colored pencils with coloring sheets</li><li>Word search sheet</li><li>A pencil</li><li>Small LEGO-style set or card game</li><li>Fidget spinner, stress ball, or worry stone</li>
+        </ul>
+      </div>
+      <div class="panel" id="p-teen" role="tabpanel" aria-labelledby="t-teen" data-tone="blush" hidden>
+        <div>
+          <div class="who">Teens</div>
+          <div class="age">Ages 13 to 17</div>
+          <p>Made for teens, not scaled up from a little kid's box. Things that feel like they belong to them.</p>
+        </div>
+        <ul class="chips">
+          <li>Puzzle book</li><li>Pencil or pen with a small journal</li><li>Fidget spinner, stress ball, or worry stone</li><li>Deck of cards</li><li>Adult coloring book or small craft kit</li>
+        </ul>
+      </div>
+      <p class="note">Exact contents change with what donors and partners provide.</p>
+    </div>
+  </section>
+
+  <section class="band alt" id="how">
+    <div class="wrap split">
+      <div>
+        <h2>How a WonderBox reaches a child</h2>
+        <ol class="steps">
+          <li><h3>We gather</h3><p>We raise money and collect donated toys, games, books, and comfort items.</p></li>
+          <li><h3>We pack</h3><p>Each box is sorted and packed for one age group, then checked before it goes out.</p></li>
+          <li><h3>We deliver</h3><p>Boxes are made for pediatric patients at Connecticut Children's in Hartford and Yale New Haven Children's Hospital, at no cost to their families.</p></li>
+          <li><h3>A child opens it</h3><p>Someone who has spent days indoors gets something that is just for them.</p></li>
+        </ol>
+      </div>
+      <aside class="give">
+        <h3>Where your donation goes</h3>
+        <dl>
+          <div><dt>Items for the boxes</dt><dd>Toys, games, books, and comfort items for every age group.</dd></div>
+          <div><dt>Packaging and delivery</dt><dd>The supplies and the work it takes to get each box to a child.</dd></div>
+        </dl>
+        <p class="free">Families never pay anything.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="band" id="help">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Ways to help</h2>
+        <p>You can fill a box in more than one way.</p>
+      </div>
+      <div class="help-grid">
+        <article class="help">
+          <h3>Donate</h3>
+          <p>Your gift pays for the items inside each box and for packaging and delivery.</p>
+          <a class="more js-donate" href="#donate">Give to WonderBox</a>
+        </article>
+        <article class="help">
+          <h3>Host a collection</h3>
+          <p>Gather new toys, games, books, or comfort items at your school, team, or workplace.</p>
+          <a class="more" href="#contact-note">Ask us how</a>
+        </article>
+        <article class="help">
+          <h3>Partner with us</h3>
+          <p>Local businesses can donate items or sponsor boxes for an age group.</p>
+          <a class="more" href="#contact-note">Get in touch</a>
+        </article>
+        <article class="help">
+          <h3>Spread the word</h3>
+          <p>Tell your friends, your school, and your neighbors. Every share reaches another person who can help.</p>
+        </article>
+      </div>
+      <p class="contact-note" id="contact-note">To host a collection or partner with us, email us at <a href="mailto:wonderboxnpo@gmail.com">wonderboxnpo@gmail.com</a>.</p>
+    </div>
+  </section>
+
+  <section class="band mission" aria-labelledby="mission-label">
+    <div class="wrap">
+      <div class="label" id="mission-label">Our mission</div>
+      <blockquote>WonderBox delivers free, age-tailored care packages to hospitalized children, bringing comfort, joy, and a reminder that they are not alone during a hard time.</blockquote>
+    </div>
+  </section>
+
+  <section class="band" id="donate">
+    <div class="wrap">
+      <div class="donate">
+        <h2>Help us fill the next box.</h2>
+        <p>Your gift covers the items inside each WonderBox and the packaging and delivery that gets it to a child. Families never pay anything.</p>
+        <a class="btn btn-inverse js-donate" id="donate-btn" href="#donate">Donate to WonderBox</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot">
+      <a class="brand" href="#top" aria-label="WonderBox home">
+        <img src="wonderbox-logo.png" alt="" width="40" height="40">
+        <span>WonderBox</span>
+      </a>
+      <nav aria-label="Footer">
+        <a href="#story">Our story</a>
+        <a href="#what">What we do</a>
+        <a href="#inside">Inside a box</a>
+        <a href="#help">Ways to help</a>
+        <a href="about.html">About us</a>
+        <a href="#donate">Donate</a>
+      </nav>
+    </div>
+    <p class="copy">WonderBox Corp. is a Connecticut nonprofit corporation run by high school students. &copy; 2026 WonderBox Corp.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Paste the fundraiser page link between the quotes to turn on every Donate button.
+  var DONATE_URL = "https://givebutter.com/WonderBoxFundraisingDrive?s=6O8smw";
+
+  var donateLinks = document.querySelectorAll(".js-donate");
+  for (var i = 0; i < donateLinks.length; i++) {
+    if (DONATE_URL) {
+      donateLinks[i].href = DONATE_URL;
+      donateLinks[i].target = "_blank";
+      donateLinks[i].rel = "noopener";
+    }
+  }
+  var main = document.getElementById("donate-btn");
+  if (main && !DONATE_URL) {
+    main.textContent = "Fundraiser link coming soon";
+    main.setAttribute("aria-disabled", "true");
+  }
+
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
+  function select(tab) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute("aria-selected", on ? "true" : "false");
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+    });
+  }
+  tabs.forEach(function (tab, idx) {
+    tab.addEventListener("click", function () { select(tab); });
+    tab.addEventListener("keydown", function (e) {
+      var next = null;
+      if (e.key === "ArrowRight") next = tabs[(idx + 1) % tabs.length];
+      if (e.key === "ArrowLeft") next = tabs[(idx - 1 + tabs.length) % tabs.length];
+      if (next) { e.preventDefault(); select(next); next.focus(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
