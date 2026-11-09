@@ -3,629 +3,817 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<style>
-:root { color-scheme: light; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
-body { margin: 0; }
-img { max-width: 100%; }
-[hidden] { display: none !important; }
-</style>
-<title>WonderBox</title>
+<title>WonderBox | Care packages for kids in the hospital</title>
+<meta name="description" content="WonderBox is a student-run Connecticut nonprofit that delivers free, age-tailored care packages to hospitalized children.">
+<meta property="og:title" content="WonderBox">
+<meta property="og:description" content="Free, age-tailored care packages for kids in the hospital. Packed by high school students in Connecticut.">
+<meta property="og:image" content="https://agentknightsofficial.github.io/Wonderbox-Website/img/share-banner.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FBF5EA">
+<link rel="icon" href="wonderbox-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&family=Poppins:wght@600;700&display=swap">
-<style>
-/* Layout concept: a sky-blue storybook page where tilted pastel cards sit like parcels on a shelf.
-   Palette: sky, cardboard brown, and four pastel parcel tones. Type: Poppins display (matches the logo wordmark), Nunito body. */
-:root {
-  --bg: #f5f8fb;
-  --bg-alt: #e8f0f7;
-  --surface: #ffffff;
-  --ink: #2b2420;
-  --ink-soft: #5b544e;
-  --brand: #6f5844;
-  --brand-ink: #ffffff;
-  --line: #d3dde7;
-  --outline: #2b2420;
-  --focus: #1d5fd1;
-  --hdr: rgba(245, 248, 251, 0.88);
-  --sky-top: #86bce6;
-  --sky-bottom: #dcedf9;
-  --hero-ink: #2b2420;
-  --hero-soft: #3f3832;
-  --pill-bg: rgba(255, 255, 255, 0.6);
-  --cloud: #ffffff;
-  --cloud-op: 0.92;
-  --star-op: 0;
-  --sage: #d5e7d0;
-  --sky-card: #cddff4;
-  --butter: #f6e6b9;
-  --blush: #f5d8cd;
-  --card-ink: #2b2420;
-  --paper: #ffffff;
-  --paper-ink: #6f5844;
-  --shadow: 0 18px 36px -14px rgba(43, 36, 32, 0.35);
-  --display: "Poppins", "Avenir Next", "Segoe UI", system-ui, sans-serif;
-  --body: "Nunito", "Segoe UI", system-ui, -apple-system, sans-serif;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #101923;
-    --bg-alt: #152231;
-    --surface: #1b2a3b;
-    --ink: #f3ede7;
-    --ink-soft: #bab4ad;
-    --brand: #e6c9a2;
-    --brand-ink: #2b2420;
-    --line: #2f3e50;
-    --outline: #a99f95;
-    --focus: #8ec5ff;
-    --hdr: rgba(16, 25, 35, 0.88);
-    --sky-top: #0d1830;
-    --sky-bottom: #27406a;
-    --hero-ink: #f6f0ea;
-    --hero-soft: #d4ddea;
-    --pill-bg: rgba(255, 255, 255, 0.1);
-    --cloud: #5d7fb0;
-    --cloud-op: 0.3;
-    --star-op: 0.9;
-    --sage: #2e4636;
-    --sky-card: #2a3f5e;
-    --butter: #574a25;
-    --blush: #5a3b34;
-    --card-ink: #f3ede7;
-    --shadow: 0 18px 36px -14px rgba(0, 0, 0, 0.7);
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #101923;
-  --bg-alt: #152231;
-  --surface: #1b2a3b;
-  --ink: #f3ede7;
-  --ink-soft: #bab4ad;
-  --brand: #e6c9a2;
-  --brand-ink: #2b2420;
-  --line: #2f3e50;
-  --outline: #a99f95;
-  --focus: #8ec5ff;
-  --hdr: rgba(16, 25, 35, 0.88);
-  --sky-top: #0d1830;
-  --sky-bottom: #27406a;
-  --hero-ink: #f6f0ea;
-  --hero-soft: #d4ddea;
-  --pill-bg: rgba(255, 255, 255, 0.1);
-  --cloud: #5d7fb0;
-  --cloud-op: 0.3;
-  --star-op: 0.9;
-  --sage: #2e4636;
-  --sky-card: #2a3f5e;
-  --butter: #574a25;
-  --blush: #5a3b34;
-  --card-ink: #f3ede7;
-  --shadow: 0 18px 36px -14px rgba(0, 0, 0, 0.7);
-  color-scheme: dark;
-}
-
-*, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--body);
-  font-size: 17px;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0 0 auto;
-  height: env(safe-area-inset-top, 0px);
-  z-index: 60;
-  background: var(--hdr);
-}
-h1, h2, h3 { font-family: var(--display); margin: 0; text-wrap: balance; }
-h2 { font-weight: 700; font-size: clamp(28px, 4vw, 42px); line-height: 1.12; }
-h3 { font-weight: 600; font-size: 21px; line-height: 1.25; }
-p { margin: 0; }
-a { color: inherit; }
-img { display: block; }
-:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
-section[id] { scroll-margin-top: 64px; }
-
-.wrap {
-  width: 100%;
-  max-width: 1180px;
-  margin-inline: auto;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-}
-.band { padding-block: clamp(56px, 8vw, 104px); }
-
-/* Buttons */
-.btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  padding: 13px 24px; border-radius: 999px; border: 2px solid transparent;
-  font: 600 16px/1 var(--display); text-decoration: none; cursor: pointer;
-  transition: transform 0.15s ease;
-}
-.btn:hover { transform: translateY(-2px); }
-.btn-primary { background: var(--brand); color: var(--brand-ink); }
-.btn-ghost { border-color: var(--hero-ink); color: var(--hero-ink); }
-.btn-inverse { background: var(--brand-ink); color: var(--brand); }
-.btn[aria-disabled="true"] { opacity: 0.75; cursor: default; }
-.btn[aria-disabled="true"]:hover { transform: none; }
-
-/* Header */
-.site-header {
-  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50;
-  background: var(--hdr); backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--line);
-}
-.bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; }
-.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--brand); font: 700 21px/1 var(--display); }
-.brand img { width: 40px; height: 40px; padding: 3px; border-radius: 12px; background: var(--paper); object-fit: contain; }
-.nav { display: flex; align-items: center; gap: 4px; }
-.nav .link { padding: 8px 12px; border-radius: 999px; color: var(--ink-soft); text-decoration: none; font-weight: 600; font-size: 15px; }
-.nav .link:hover { color: var(--ink); background: var(--bg-alt); }
-.nav .btn { padding: 10px 20px; font-size: 15px; margin-left: 8px; }
-@media (max-width: 800px) { .nav .link { display: none; } .nav .btn { margin-left: 0; } }
-
-/* Hero */
-.hero { position: relative; overflow: hidden; color: var(--hero-ink); background: linear-gradient(180deg, var(--sky-top), var(--sky-bottom)); }
-.hero::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: var(--star-op);
-  background-image:
-    radial-gradient(1.6px 1.6px at 8% 18%, #fff, transparent),
-    radial-gradient(1.2px 1.2px at 17% 62%, #fff, transparent),
-    radial-gradient(1.8px 1.8px at 29% 30%, #fff, transparent),
-    radial-gradient(1.2px 1.2px at 41% 80%, #fff, transparent),
-    radial-gradient(1.6px 1.6px at 55% 14%, #fff, transparent),
-    radial-gradient(1.2px 1.2px at 63% 52%, #fff, transparent),
-    radial-gradient(1.8px 1.8px at 78% 24%, #fff, transparent),
-    radial-gradient(1.2px 1.2px at 88% 70%, #fff, transparent),
-    radial-gradient(1.6px 1.6px at 94% 12%, #fff, transparent);
-}
-.cloud { position: absolute; width: var(--w); color: var(--cloud); opacity: var(--cloud-op); pointer-events: none; animation: drift var(--t) ease-in-out infinite alternate; }
-.cloud svg { display: block; width: 100%; height: auto; fill: currentColor; }
-.c1 { --w: 230px; --t: 26s; top: 7%; left: -3%; }
-.c2 { --w: 280px; --t: 32s; top: 58%; right: -4%; }
-.c3 { --w: 150px; --t: 22s; top: 22%; left: 47%; }
-@keyframes drift { from { transform: translateX(-4%); } to { transform: translateX(8%); } }
-.hero-grid {
-  position: relative; z-index: 1; display: grid; align-items: center; gap: clamp(32px, 6vw, 72px);
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  padding-block: clamp(44px, 7vw, 92px) clamp(56px, 8vw, 110px);
-}
-.pill { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; background: var(--pill-bg); border: 1px solid var(--hero-soft); font-weight: 800; font-size: 14px; }
-.pill i { width: 8px; height: 8px; border-radius: 50%; background: #3fa66b; }
-.hero h1 { font-weight: 700; font-size: clamp(38px, 6.2vw, 68px); line-height: 1.04; margin-top: 20px; }
-.lede { margin-top: 20px; max-width: 34em; font-size: clamp(18px, 2vw, 21px); color: var(--hero-soft); }
-.cta-row { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 12px; }
-.hero-card {
-  position: relative; margin: 0 auto; width: 100%; max-width: 440px; padding: 18px 18px 14px;
-  background: var(--paper); border-radius: 28px; box-shadow: var(--shadow);
-  transform: rotate(2.5deg); animation: float 7s ease-in-out infinite alternate;
-}
-.hero-card::before {
-  content: ""; position: absolute; top: -14px; left: 50%; width: 120px; height: 30px; margin-left: -60px;
-  background: var(--butter); opacity: 0.95; border-radius: 4px; transform: rotate(-3deg);
-}
-.hero-card img { width: 100%; height: auto; aspect-ratio: 1 / 1; }
-.hero-card figcaption { margin-top: 6px; text-align: center; color: var(--paper-ink); font: 600 13px/1.3 var(--display); letter-spacing: 0.1em; text-transform: uppercase; }
-@keyframes float { from { transform: rotate(2.5deg) translateY(0); } to { transform: rotate(1.5deg) translateY(-8px); } }
-@media (max-width: 860px) {
-  .hero-grid { grid-template-columns: minmax(0, 1fr); }
-  .hero-card { max-width: 340px; }
-}
-
-/* Ribbon */
-.ribbon { overflow: hidden; background: var(--brand); color: var(--brand-ink); padding-block: 14px; }
-.ribbon-track { display: flex; width: max-content; animation: scroll 38s linear infinite; }
-.ribbon-set { display: flex; align-items: center; flex-shrink: 0; }
-.ribbon-set span { font: 600 14px/1 var(--display); letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
-.ribbon-set i { width: 7px; height: 7px; margin-inline: 28px; border-radius: 50%; background: currentColor; opacity: 0.7; }
-@keyframes scroll { to { transform: translateX(-50%); } }
-
-/* Stats */
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 26px; overflow: hidden; }
-.stat { padding: 26px 28px; border-right: 1px solid var(--line); }
-.stat:last-child { border-right: 0; }
-.stat b { display: block; font: 700 clamp(34px, 4.4vw, 48px)/1 var(--display); color: var(--brand); font-variant-numeric: tabular-nums; }
-.stat span { display: block; margin-top: 8px; color: var(--ink-soft); font-weight: 600; }
-@media (max-width: 620px) { .stat { border-right: 0; border-bottom: 1px solid var(--line); } .stat:last-child { border-bottom: 0; } }
-
-.serving { margin-top: 22px; text-align: center; color: var(--ink-soft); font-weight: 600; }
-
-/* Story */
-.split { display: grid; gap: clamp(28px, 5vw, 64px); grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; }
-.split > .lead { position: sticky; top: 96px; }
-.lead p { margin-top: 16px; color: var(--ink-soft); font-size: 18px; max-width: 26em; }
-.story p + p { margin-top: 18px; }
-.story p { font-size: 19px; max-width: 34em; }
-@media (max-width: 900px) { .split { grid-template-columns: minmax(0, 1fr); } .split > .lead { position: static; } }
-
-/* What we do */
-.alt { background: var(--bg-alt); }
-.do-grid { display: grid; gap: 22px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.tilt {
-  display: flex; flex-direction: column; gap: 12px; padding: 26px; border-radius: 26px;
-  background: var(--tone); color: var(--card-ink); border: 2px solid var(--outline);
-  transform: rotate(var(--r, 0deg)); transition: transform 0.25s ease;
-}
-.tilt:hover, .tilt:focus-within { transform: rotate(0deg) translateY(-4px); }
-.tilt p { font-size: 16.5px; }
-.tilt .more { margin-top: auto; padding-top: 6px; font-weight: 800; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
-.do-grid .tilt:nth-child(even) { margin-top: 28px; }
-.do-grid .tilt:nth-child(1) { --r: -1.4deg; }
-.do-grid .tilt:nth-child(2) { --r: 1.2deg; }
-.do-grid .tilt:nth-child(3) { --r: 1deg; }
-.do-grid .tilt:nth-child(4) { --r: -1.2deg; }
-[data-tone="sage"] { --tone: var(--sage); }
-[data-tone="sky"] { --tone: var(--sky-card); }
-[data-tone="butter"] { --tone: var(--butter); }
-[data-tone="blush"] { --tone: var(--blush); }
-@media (max-width: 560px) { .do-grid { grid-template-columns: minmax(0, 1fr); } .do-grid .tilt:nth-child(even) { margin-top: 0; } }
-
-/* Inside a box */
-.sec-head { max-width: 40em; }
-.sec-head p { margin-top: 14px; color: var(--ink-soft); font-size: 18px; }
-.tabs { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; }
-.tab {
-  padding: 12px 20px; border-radius: 999px; border: 2px solid var(--outline); cursor: pointer;
-  background: var(--surface); color: var(--ink); font: 600 16px/1 var(--display);
-}
-.tab[aria-selected="true"] { background: var(--brand); border-color: var(--brand); color: var(--brand-ink); }
-.panel {
-  margin-top: 20px; display: grid; gap: 28px; align-items: center;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  padding: clamp(24px, 4vw, 44px); border-radius: 30px;
-  background: var(--tone); color: var(--card-ink); border: 2px solid var(--outline);
-}
-.panel .who { font: 600 15px/1 var(--display); letter-spacing: 0.1em; text-transform: uppercase; }
-.panel .age { margin-top: 10px; font: 700 clamp(40px, 6vw, 68px)/1 var(--display); }
-.panel p { margin-top: 14px; font-size: 18px; max-width: 24em; }
-.chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
-.chips li { padding: 10px 16px; border-radius: 16px; background: var(--surface); color: var(--ink); border: 2px solid var(--outline); font-weight: 800; }
-.note { margin-top: 16px; font-size: 14.5px; color: var(--ink-soft); }
-@media (max-width: 760px) { .panel { grid-template-columns: minmax(0, 1fr); } }
-
-/* How it works */
-.steps { list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 22px; counter-reset: step; }
-.steps li { position: relative; padding-left: 62px; counter-increment: step; }
-.steps li::before {
-  content: counter(step); position: absolute; left: 0; top: 0; width: 44px; height: 44px; border-radius: 50%;
-  display: grid; place-items: center; background: var(--brand); color: var(--brand-ink); font: 700 18px/1 var(--display);
-}
-.steps h3 { font-size: 20px; }
-.steps p { margin-top: 4px; color: var(--ink-soft); }
-.give { background: var(--surface); border: 1px solid var(--line); border-radius: 28px; padding: clamp(24px, 3.5vw, 40px); box-shadow: var(--shadow); }
-.give h3 { font-size: 24px; }
-.give dl { margin: 20px 0 0; display: grid; gap: 18px; }
-.give dt { font: 600 17px/1.3 var(--display); }
-.give dd { margin: 4px 0 0; color: var(--ink-soft); }
-.give .free { margin-top: 24px; padding: 14px 18px; border-radius: 16px; background: var(--sage); color: var(--card-ink); font-weight: 800; }
-
-/* Ways to help */
-.help-grid { margin-top: 32px; display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
-.help { display: flex; flex-direction: column; gap: 10px; padding: 26px; border-radius: 22px; background: var(--surface); border: 1px solid var(--line); }
-.help p { color: var(--ink-soft); font-size: 16.5px; }
-.help .more { margin-top: auto; padding-top: 8px; font-weight: 800; color: var(--brand); text-underline-offset: 4px; text-decoration-thickness: 2px; }
-.contact-note { margin-top: 22px; color: var(--ink-soft); }
-
-/* Mission */
-.mission { background: linear-gradient(180deg, var(--sky-bottom), var(--sky-top)); color: var(--hero-ink); }
-.mission .label { font: 600 14px/1 var(--display); letter-spacing: 0.14em; text-transform: uppercase; }
-.mission blockquote { margin: 20px 0 0; max-width: 24em; font: 600 clamp(26px, 3.8vw, 44px)/1.22 var(--display); text-wrap: balance; }
-
-/* Donate */
-.donate { padding: clamp(32px, 6vw, 72px); border-radius: 34px; background: var(--brand); color: var(--brand-ink); }
-.donate h2 { color: inherit; max-width: 14em; }
-.donate p { margin-top: 16px; max-width: 34em; font-size: 19px; }
-.donate .btn { margin-top: 28px; }
-
-/* Footer */
-.site-footer { background: var(--bg-alt); border-top: 1px solid var(--line); padding-block: 40px; }
-.foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; }
-.foot p { color: var(--ink-soft); font-size: 15px; max-width: 34em; }
-.foot nav { display: flex; flex-wrap: wrap; gap: 8px 20px; }
-.foot nav a { color: var(--ink-soft); font-weight: 600; text-decoration: none; }
-.foot nav a:hover { color: var(--ink); text-decoration: underline; }
-.copy { margin-top: 24px; color: var(--ink-soft); font-size: 14px; }
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .cloud, .hero-card, .ribbon-track { animation: none; }
-  .tilt, .btn { transition: none; }
-}
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..800,0..100,0..1&family=Nunito+Sans:opsz,wght@6..12,400..800&display=swap">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-  <symbol id="cloud" viewBox="0 0 200 100">
-    <circle cx="60" cy="62" r="28"/><circle cx="100" cy="46" r="36"/><circle cx="142" cy="62" r="26"/>
-    <rect x="34" y="62" width="134" height="28" rx="14"/>
-  </symbol>
+  <symbol id="d-star" viewBox="0 0 100 100"><path d="M50 8 L61 37 L92 39 L68 58 L77 90 L50 72 L23 90 L32 58 L8 39 L39 37 Z"/></symbol>
+  <symbol id="d-heart" viewBox="0 0 100 100"><path d="M50 86 C 18 64, 6 44, 18 28 C 28 15, 44 18, 50 32 C 56 18, 72 15, 82 28 C 94 44, 82 64, 50 86 Z"/></symbol>
+  <symbol id="d-note" viewBox="0 0 100 100"><path d="M42 74 V24 L84 14 V64" fill="none"/><path d="M42 36 L84 26" fill="none"/><circle cx="31" cy="76" r="11"/><circle cx="73" cy="66" r="11"/></symbol>
+  <symbol id="d-spark" viewBox="0 0 100 100"><path d="M50 8 C 54 40, 60 46, 92 50 C 60 54, 54 60, 50 92 C 46 60, 40 54, 8 50 C 40 46, 46 40, 50 8 Z"/></symbol>
+  <symbol id="d-cloud" viewBox="0 0 200 110"><path d="M42 94 C 14 94, 10 62, 34 56 C 30 30, 62 20, 78 38 C 86 10, 134 10, 140 42 C 162 30, 192 48, 180 72 C 198 78, 192 98, 168 94 Z"/></symbol>
+  <symbol id="d-plane" viewBox="0 0 100 100"><path d="M10 50 L92 16 L66 86 L50 62 Z"/><path d="M92 16 L50 62 L48 82 L60 70" fill="var(--sky)"/></symbol>
+  <symbol id="d-pin" viewBox="0 0 100 100"><path d="M50 92 C 30 66, 20 52, 20 38 A 30 30 0 0 1 80 38 C 80 52, 70 66, 50 92 Z"/><circle cx="50" cy="38" r="11" fill="var(--paper)"/></symbol>
 </svg>
+
+<div class="progress" aria-hidden="true"><i id="progress"></i></div>
 
 <header class="site-header">
   <div class="wrap bar">
     <a class="brand" href="#top" aria-label="WonderBox home">
-      <img src="wonderbox-logo.png" alt="" width="40" height="40">
+      <img src="wonderbox-logo.png" alt="" width="46" height="46">
       <span>WonderBox</span>
     </a>
     <nav class="nav" aria-label="Main">
-      <a class="link" href="#story">Our story</a>
-      <a class="link" href="#what">What we do</a>
-      <a class="link" href="#inside">Inside a box</a>
-      <a class="link" href="#help">Ways to help</a>
-      <a class="link" href="about.html">About us</a>
-      <a class="btn btn-primary js-donate" href="#donate">Donate</a>
+      <a href="#story">Story</a>
+      <a href="#inside">Inside a box</a>
+      <a href="#photos">The process</a>
+      <a href="team.html">Team</a>
+      <a href="#help">Get involved</a>
+      <a class="btn btn-navy btn-sm js-donate" href="#donate">Donate</a>
     </nav>
   </div>
 </header>
 
 <main id="top">
-  <section class="hero">
-    <div class="cloud c1" aria-hidden="true"><svg viewBox="0 0 200 100"><use href="#cloud"/></svg></div>
-    <div class="cloud c2" aria-hidden="true"><svg viewBox="0 0 200 100"><use href="#cloud"/></svg></div>
-    <div class="cloud c3" aria-hidden="true"><svg viewBox="0 0 200 100"><use href="#cloud"/></svg></div>
+  <div class="bg-fx" aria-hidden="true">
+    <svg class="dd" viewBox="0 0 200 110" style="left:-3%;top:14%;--p:.10;width:190px;fill:#fff;stroke:var(--cloud)"><use href="#d-cloud"/></svg>
+    <svg class="dd" viewBox="0 0 100 100" style="right:6%;top:24%;--p:.18;width:38px;fill:var(--butter)"><use href="#d-star"/></svg>
+    <svg class="dd" viewBox="0 0 100 100" style="left:5%;top:36%;--p:.14;width:34px;fill:var(--blush)"><use href="#d-heart"/></svg>
+    <svg class="dd" viewBox="0 0 200 110" style="right:-4%;top:46%;--p:.08;width:230px;fill:#fff;stroke:var(--cloud)"><use href="#d-cloud"/></svg>
+    <svg class="dd" viewBox="0 0 100 100" style="left:3%;top:58%;--p:.2;width:30px;fill:var(--sky)"><use href="#d-spark"/></svg>
+    <svg class="dd" viewBox="0 0 100 100" style="right:4%;top:68%;--p:.12;width:36px;fill:var(--blush)"><use href="#d-heart"/></svg>
+    <svg class="dd" viewBox="0 0 200 110" style="left:-3%;top:80%;--p:.1;width:200px;fill:#fff;stroke:var(--cloud)"><use href="#d-cloud"/></svg>
+    <svg class="dd" viewBox="0 0 100 100" style="right:7%;top:88%;--p:.16;width:34px;fill:var(--butter)"><use href="#d-star"/></svg>
+  </div>
+  
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="sky" id="sky" aria-hidden="true">
+      <div style="left:3%;top:9%;--z:-14px"><svg class="dd" style="--t:8s;width:120px;fill:#fff;stroke:var(--cloud)"><use href="#d-cloud"/></svg></div>
+      <div style="left:44%;top:5%;--z:18px"><svg class="dd" style="--t:6s;width:38px;fill:var(--butter)" viewBox="0 0 100 100"><use href="#d-star"/></svg></div>
+      <div style="left:6%;bottom:12%;--z:22px"><svg class="dd" style="--t:7s;width:40px;fill:var(--blush)" viewBox="0 0 100 100"><use href="#d-heart"/></svg></div>
+      <div style="right:4%;top:8%;--z:-20px"><svg class="dd" style="--t:9s;width:150px;fill:#fff;stroke:var(--cloud)"><use href="#d-cloud"/></svg></div>
+      <div style="right:3%;bottom:16%;--z:16px"><svg class="dd" style="--t:6.5s;width:36px;fill:var(--navy-3);stroke:var(--navy)" viewBox="0 0 100 100"><use href="#d-note"/></svg></div>
+      <div style="left:38%;bottom:6%;--z:-12px"><svg class="dd" style="--t:5.5s;width:28px;fill:var(--sky)" viewBox="0 0 100 100"><use href="#d-spark"/></svg></div>
+      <div style="left:52%;top:30%;--z:10px"><svg class="dd" style="--t:6s;width:22px;fill:var(--butter)" viewBox="0 0 100 100"><use href="#d-spark"/></svg></div>
+    </div>
+
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <span class="pill"><i></i>A student-run nonprofit in Connecticut</span>
-        <h1>A little wonder for kids in the hospital.</h1>
-        <p class="lede">WonderBox delivers free care packages to hospitalized children. Every box is built for the child's age, so it holds something they actually want.</p>
+        <p class="kicker">a student-run nonprofit in Connecticut</p>
+        <h1 id="hero-title">A little <span class="scribble">wonder<svg viewBox="0 0 220 24" preserveAspectRatio="none" aria-hidden="true"><path d="M4 16 C 40 4, 80 24, 116 13 S 188 4, 216 15"/></svg></span>, delivered to kids in the hospital.</h1>
+        <p class="lede">WonderBox packs free care packages for hospitalized children, and every box is built for the child's age. This one is for you. Go ahead and open it.</p>
         <div class="cta-row">
-          <a class="btn btn-primary js-donate" href="#donate">Donate</a>
-          <a class="btn btn-ghost" href="#story">Read our story</a>
+          <a class="btn btn-navy js-donate" href="#donate">Donate to WonderBox</a>
+          <a class="btn" href="#journey">How it works</a>
+        </div>
+        <p class="hero-note"><span>psst, rip the tape</span><svg viewBox="0 0 74 40" class="dd" style="fill:none;stroke-width:3"><path d="M4 30 C 22 36, 46 30, 64 12"/><path d="M52 12 L65 11 L63 24"/></svg></p>
+      </div>
+
+      <div class="play">
+        <div class="stage-wrap" id="stageWrap">
+          <div class="stage" id="stage" data-state="sealed">
+            <svg class="rainbow" viewBox="0 0 600 620" aria-hidden="true">
+              <path d="M30 400 A 270 270 0 0 1 570 400" stroke="var(--blush)"/>
+              <path d="M56 400 A 244 244 0 0 1 544 400" stroke="var(--butter)"/>
+              <path d="M82 400 A 218 218 0 0 1 518 400" stroke="var(--sky)"/>
+              <g class="dd" style="fill:#fff;stroke:var(--cloud)"><use href="#d-cloud" x="-30" y="350" width="140" height="78"/><use href="#d-cloud" x="490" y="350" width="140" height="78"/></g>
+            </svg>
+            <div class="ground"></div>
+
+            <div class="scene" id="scene">
+              <div class="bob" id="bob">
+                <div class="box3d" id="box3d">
+                  <div class="face wd f-bottom"></div>
+                  <div class="face wh i-back"></div>
+                  <div class="face dh i-left"></div>
+                  <div class="face dh i-right"></div>
+                  <div class="face wh i-front"></div>
+                  <div class="face wd i-floor"></div>
+                  <div class="face wh f-back"></div>
+                  <div class="face dh f-left"></div>
+                  <div class="face dh f-right">
+                    <div class="label"><small>DELIVER TO</small>a kid who could use a smile<i></i></div>
+                    <div class="fragile">FRAGILE<br>HANDLE WITH LOVE</div>
+                  </div>
+                  <div class="face wh f-front">
+                    <div class="tape tape-f" id="tapeF"><b>WONDERBOX ♥ WONDER</b></div>
+                    <span class="mk" id="mC" style="left:calc(var(--W) / 2 - 4px);top:65px"></span>
+                    <div class="print"><strong>WonderBox</strong><span>packed with <svg class="dd" viewBox="0 0 100 100" style="fill:var(--coral);stroke-width:6"><use href="#d-heart"/></svg> for you</span></div>
+                  </div>
+                  <div class="top wd">
+                    <div class="flap flap-b"><i class="fo"></i><i class="fi"></i></div>
+                    <div class="flap flap-f"><i class="fo"></i><i class="fi"></i></div>
+                    <div class="flap flap-l"><i class="fo"></i><i class="fi"></i></div>
+                    <div class="flap flap-r"><i class="fo"></i><i class="fi"></i></div>
+                    <div class="tape tape-t" id="tapeT"><b>WONDERBOX ♥ WONDERBOX ♥ WONDERBOX ♥</b></div>
+                    <div class="tab" id="tab"></div>
+                    <span class="mk" id="mA" style="left:calc(var(--W) / 2 - 1px);top:0"></span>
+                    <span class="mk" id="mB" style="left:calc(var(--W) / 2 - 1px);top:calc(var(--D) - 2px)"></span>
+                    <span class="mk" id="mM" style="left:calc(var(--W) / 2 - 1px);top:calc(var(--D) / 2 - 1px)"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <svg class="peel" viewBox="0 0 600 620" aria-hidden="true">
+              <g id="peelG" style="display:none">
+                <path id="peelOut" fill="none" stroke="#111B33" stroke-width="46" stroke-linecap="butt"/>
+                <polygon id="peelEnd" fill="#2A3F6B" stroke="#111B33" stroke-width="2.5" stroke-linejoin="round"/>
+                <path id="peelBody" fill="none" stroke="#2A3F6B" stroke-width="40" stroke-linecap="butt"/>
+                <path id="peelShine" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="10" stroke-linecap="butt"/>
+                <path id="peelDots" fill="none" stroke="#FBF5EA" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="0.1 13" opacity=".85"/>
+              </g>
+            </svg>
+
+            <div class="hintbox" id="hintbox"><div class="hint">grab the tape<br>&amp; pull!<svg viewBox="0 0 70 50" class="dd" style="fill:none;stroke-width:3"><path d="M6 6 C 20 30, 40 40, 60 40"/><path d="M48 32 L61 40 L50 49"/></svg></div></div>
+            <div class="hintbox" id="ghostbox"><svg class="dd ghost" viewBox="0 0 100 112" style="fill:#fff;stroke-width:5"><path d="M34 60 V16 a9 9 0 0 1 18 0 V48 l3 -2 a9 9 0 0 1 16 4 v4 a9 9 0 0 1 15 5 v6 a9 9 0 0 1 9 6 V84 C 95 100, 82 108, 66 108 H 56 C 44 108, 37 102, 30 92 L 12 66 a9 9 0 0 1 14 -10 Z"/></svg></div>
+
+            <div class="items" id="items" inert>
+              <a class="item" href="#story" style="--c:var(--blush);--i:0"><span class="item-float"><span class="item-art"><svg class="dd" viewBox="0 0 100 100" aria-hidden="true"><circle cx="27" cy="25" r="11" fill="#E8C49A"/><circle cx="73" cy="25" r="11" fill="#E8C49A"/><circle cx="27" cy="25" r="4.5" fill="#F6E0C4" stroke-width="2.4"/><circle cx="73" cy="25" r="4.5" fill="#F6E0C4" stroke-width="2.4"/><ellipse cx="50" cy="80" rx="27" ry="17" fill="#E8C49A"/><ellipse cx="50" cy="82" rx="12" ry="9" fill="#F6E0C4" stroke-width="2.4"/><circle cx="50" cy="44" r="25" fill="#E8C49A"/><ellipse cx="50" cy="53" rx="11" ry="8" fill="#F6E0C4" stroke-width="2.4"/><circle cx="41" cy="40" r="2.8" fill="#1C2B4D" stroke="none"/><circle cx="59" cy="40" r="2.8" fill="#1C2B4D" stroke="none"/><ellipse cx="50" cy="50" rx="3.6" ry="2.6" fill="#1C2B4D" stroke="none"/><path d="M45.5 56 q4.5 4 9 0" fill="none" stroke-width="2.4"/><circle cx="35" cy="49" r="3.2" fill="#F3B3A2" stroke="none"/><circle cx="65" cy="49" r="3.2" fill="#F3B3A2" stroke="none"/></svg></span><span class="item-tag">Our story</span></span></a>
+              <a class="item" href="#mission" style="--c:var(--sky);--i:1"><span class="item-float"><span class="item-art"><svg class="dd" viewBox="0 0 100 100" aria-hidden="true"><g transform="rotate(-7 50 50)"><rect x="20" y="12" width="60" height="76" rx="7" fill="#FFFDF8"/><path d="M50 68 C 30 56, 24 43, 32 34 C 38 27, 47 29, 50 37 C 53 29, 62 27, 68 34 C 76 43, 70 56, 50 68 Z" fill="#E0705F"/><path d="M33 79 h24" stroke-width="2.6"/></g></svg></span><span class="item-tag">Our mission</span></span></a>
+              <a class="item" href="#inside" style="--c:var(--butter);--i:2"><span class="item-float"><span class="item-art"><svg class="dd" viewBox="0 0 100 100" aria-hidden="true"><rect x="23" y="44" width="11" height="10" rx="2" fill="#CCDCEE"/><rect x="41" y="44" width="11" height="10" rx="2" fill="#CCDCEE"/><rect x="14" y="52" width="48" height="32" rx="4" fill="#CCDCEE"/><rect x="51" y="22" width="11" height="10" rx="2" fill="#D4E4CC"/><rect x="68" y="22" width="11" height="10" rx="2" fill="#D4E4CC"/><rect x="44" y="30" width="44" height="28" rx="4" fill="#D4E4CC"/></svg></span><span class="item-tag">What's inside</span></span></a>
+              <a class="item" href="team.html" style="--c:var(--sage);--i:3"><span class="item-float"><span class="item-art"><svg class="dd" viewBox="0 0 100 100" aria-hidden="true"><g transform="rotate(38 50 50)"><rect x="40" y="8" width="20" height="62" rx="3" fill="#F6E2A6"/><rect x="40" y="8" width="20" height="12" rx="3" fill="#F3CDBE"/><path d="M50 24 V66" stroke-width="2"/><path d="M40 70 L50 92 L60 70 Z" fill="#E8C49A"/><path d="M46.4 84 L50 92 L53.6 84 Z" fill="#1C2B4D"/></g></svg></span><span class="item-tag">The team</span></span></a>
+              <a class="item" href="#photos" style="--c:var(--blush);--i:4"><span class="item-float"><span class="item-art"><svg class="dd" viewBox="0 0 100 100" aria-hidden="true"><g transform="rotate(-11 36 52)"><rect x="12" y="22" width="46" height="56" rx="3" fill="#FFFDF8"/><rect x="18" y="28" width="34" height="34" fill="#CCDCEE" stroke-width="2.4"/><path d="M18 56 l9 -10 l8 8 l5 -5 l12 11" fill="none" stroke-width="2.4"/></g><g transform="rotate(9 64 50)"><rect x="42" y="20" width="46" height="56" rx="3" fill="#FFFDF8"/><rect x="48" y="26" width="34" height="34" fill="#F6E2A6" stroke-width="2.4"/><circle cx="65" cy="41" r="6" fill="#E0705F" stroke-width="2.4"/></g></svg></span><span class="item-tag">Photos</span></span></a>
+              <a class="item" href="#donate" style="--c:var(--butter);--i:5"><span class="item-float"><span class="item-art"><svg class="dd" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="18" r="10" fill="#F6E2A6"/><path d="M50 13 v10" stroke-width="2.4"/><path d="M17 58 c-9 0 -10 -9 -3 -11" fill="none"/><rect x="28" y="72" width="10" height="14" rx="3" fill="#F3CDBE"/><rect x="60" y="72" width="10" height="14" rx="3" fill="#F3CDBE"/><path d="M33 40 L30 25 L45 34" fill="#F3CDBE"/><ellipse cx="50" cy="58" rx="34" ry="24" fill="#F3CDBE"/><rect x="78" y="50" width="12" height="16" rx="5" fill="#F3CDBE"/><circle cx="68" cy="51" r="2.8" fill="#1C2B4D" stroke="none"/><path d="M42 36 h16" stroke-width="3.8"/></svg></span><span class="item-tag">Fundraising</span></span></a>
+              <a class="item" href="#help" style="--c:var(--sky);--i:6"><span class="item-float"><span class="item-art"><svg class="dd" viewBox="0 0 100 100" aria-hidden="true"><path d="M10 86 q16 -2 24 -18" fill="none" stroke-dasharray="3 8" stroke-width="2.6"/><path d="M14 50 L90 18 L64 84 L50 62 Z" fill="#FFFDF8"/><path d="M90 18 L50 62 L48 80 L60 70" fill="#CCDCEE"/></svg></span><span class="item-tag">Connections</span></span></a>
+            </div>
+
+            <button class="gun" id="gun" type="button" aria-label="Tape gun. Drag it along the top of the box to seal it, or press to seal it automatically." hidden><svg class="dd" viewBox="0 0 120 90" aria-hidden="true"><path d="M36 56 L24 86 h22 l10 -26" fill="#4A6396"/><circle cx="50" cy="32" r="24" fill="#D6AA72"/><circle cx="50" cy="32" r="9" fill="#FFFDF8"/><path d="M12 44 h84 a8 8 0 0 1 8 8 v4 a6 6 0 0 1 -6 6 h-86 z" fill="#2A3F6B"/><path d="M104 54 l12 4 l-12 5" fill="#FFFDF8"/></svg></button>
+            <div class="fx" id="fx"></div>
+          </div>
+        </div>
+        <div class="play-bar">
+          <p id="playMsg" aria-live="polite">Grab the tape tab and drag along the top to rip the box open.</p>
+          <button class="link-btn" id="autoBtn" type="button">Open it for me</button>
+          <button class="btn btn-sm" id="packBtn" type="button" hidden>Tape it back up</button>
         </div>
       </div>
-      <figure class="hero-card">
-        <img src="wonderbox-logo.png" alt="Illustration of an open box filled with a teddy bear, building blocks, a heart card, and a pencil, under a rainbow and clouds" width="800" height="800">
-        <figcaption>Care packages for hospitalized children</figcaption>
-      </figure>
     </div>
   </section>
 
-  <div class="ribbon" aria-hidden="true">
-    <div class="ribbon-track">
-      <div class="ribbon-set"><span>Free to every family</span><i></i><span>Built by high school students</span><i></i><span>Made for every age</span><i></i><span>One box at a time</span><i></i></div>
-      <div class="ribbon-set"><span>Free to every family</span><i></i><span>Built by high school students</span><i></i><span>Made for every age</span><i></i><span>One box at a time</span><i></i></div>
-    </div>
+
+  <div class="tapes" aria-hidden="true">
+    <div class="tape-band t2"><div class="tape-track"><span>THIS SIDE UP</span><i>&#9650;</i><span>MADE FOR EVERY AGE</span><i>&#9650;</i><span>ONE BOX AT A TIME</span><i>&#9650;</i><span>THIS SIDE UP</span><i>&#9650;</i><span>MADE FOR EVERY AGE</span><i>&#9650;</i><span>ONE BOX AT A TIME</span><i>&#9650;</i><span>THIS SIDE UP</span><i>&#9650;</i><span>MADE FOR EVERY AGE</span><i>&#9650;</i><span>ONE BOX AT A TIME</span><i>&#9650;</i><span>THIS SIDE UP</span><i>&#9650;</i><span>MADE FOR EVERY AGE</span><i>&#9650;</i><span>ONE BOX AT A TIME</span><i>&#9650;</i></div></div>
+    <div class="tape-band t1"><div class="tape-track"><span>WONDERBOX</span><i>&hearts;</i><span>HANDLE WITH LOVE</span><i>&hearts;</i><span>FREE TO EVERY FAMILY</span><i>&hearts;</i><span>PACKED BY STUDENTS</span><i>&hearts;</i><span>WONDERBOX</span><i>&hearts;</i><span>HANDLE WITH LOVE</span><i>&hearts;</i><span>FREE TO EVERY FAMILY</span><i>&hearts;</i><span>PACKED BY STUDENTS</span><i>&hearts;</i><span>WONDERBOX</span><i>&hearts;</i><span>HANDLE WITH LOVE</span><i>&hearts;</i><span>FREE TO EVERY FAMILY</span><i>&hearts;</i><span>PACKED BY STUDENTS</span><i>&hearts;</i><span>WONDERBOX</span><i>&hearts;</i><span>HANDLE WITH LOVE</span><i>&hearts;</i><span>FREE TO EVERY FAMILY</span><i>&hearts;</i><span>PACKED BY STUDENTS</span><i>&hearts;</i></div></div>
   </div>
 
-  <section class="band" style="padding-bottom: 0;">
+  <section class="band stats" id="impact" aria-label="WonderBox by the numbers">
     <div class="wrap">
-      <div class="stats">
-        <div class="stat"><b>3</b><span>age groups, each with its own box</span></div>
-        <div class="stat"><b>$0</b><span>cost to every family</span></div>
-        <div class="stat"><b>100%</b><span>run by high school students</span></div>
+      <header class="sec-head" data-reveal>
+        <p class="kicker">by the numbers</p>
+        <h2>Small team. Real boxes.</h2>
+      </header>
+      <div class="bento">
+        <div class="tile t-raised" data-reveal style="--t:var(--butter)">
+          <span class="badge" aria-hidden="true">and<br>counting</span>
+          <p class="tile-label">raised through donations</p>
+          <div class="big"><span>$</span><b data-count="3500" data-comma>3,500</b></div>
+          <p class="tile-sub">Spent on the items inside every box, plus packaging and delivery.</p>
+        </div>
+        <div class="tile t-hosp" data-reveal style="--t:var(--sky);--d:.08s">
+          <p class="tile-label">hospitals we deliver to</p>
+          <div class="big"><b data-count="3">3</b></div>
+          <div class="pills"><span>Hartford</span><span>New Britain</span><span>New Haven</span></div>
+        </div>
+        <div class="tile t-student" data-reveal style="--t:var(--blush);--d:.16s">
+          <p class="tile-label">run by</p>
+          <div class="big"><b data-count="100" data-suffix="%">100%</b></div>
+          <p class="tile-sub">high school students, start to finish.</p>
+        </div>
+        <div class="tile t-ages" data-reveal style="--t:var(--sage);--d:.08s">
+          <p class="tile-label">box types</p>
+          <div class="big"><b data-count="3">3</b></div>
+          <div class="pills"><span>ages 2&ndash;5</span><span>6&ndash;12</span><span>13&ndash;17</span></div>
+        </div>
+        <div class="tile t-free" data-reveal style="--t:var(--paper);--d:.16s">
+          <p class="tile-label">cost to any family</p>
+          <div class="big"><b>$0</b></div>
+          <p class="tile-sub">Ever. That is the whole point.</p>
+        </div>
       </div>
-      <p class="serving">Made for children at Connecticut Children's in Hartford and Yale New Haven Children's Hospital.</p>
     </div>
   </section>
 
-  <section class="band" id="story">
-    <div class="wrap split">
-      <div class="lead">
-        <h2>Why we started WonderBox</h2>
-        <p>It began in hospital hallways, with a group of friends who kept noticing the same thing.</p>
+  <section class="band story" id="story">
+    <div class="wrap story-grid">
+      <div class="story-lead" data-reveal>
+        <p class="kicker">the origin</p>
+        <h2>We saw the gap. So we <span class="hl">built the box.</span></h2>
+        <p>The care in these hospitals is incredible. But the kid in the bed still has a very long day to fill, a long way from home.</p>
+        <p class="story-cta"><a class="btn btn-sm" href="team.html">Meet the team</a></p>
       </div>
-      <div class="story">
-        <p>We are a group of high school students. During the school year and through our summers, we volunteered in hospitals.</p>
-        <p>What stayed with us was how hard these stays can be on children. They are away from home, their friends, and everything familiar, often for days or weeks at a time. Medicine takes care of the illness. Nobody has much time to take care of the child's spirits.</p>
-        <p>So we decided to do something about it together. We started WonderBox to give hospitalized kids something that is just for them. It is a care package built for their age, delivered free, and a reminder that people they have never met are thinking of them.</p>
-        <p><a class="btn btn-primary" href="about.html">Meet the team</a></p>
+      <div class="notebook" data-reveal style="--d:.12s">
+        <svg class="dd doodle" viewBox="0 0 100 100" style="fill:var(--butter)" aria-hidden="true"><use href="#d-star"/></svg>
+        <p>We're high schoolers who volunteer in Connecticut hospitals. Between shifts you notice things: kids stuck inside for days or weeks, away from home, their friends, their stuff.</p>
+        <p>Medicine handles the illness. Nobody really has the time to make the day feel less long.</p>
+        <p>So we made that our thing. One box per age group, filled with what we'd actually want at 4, at 10, at 16. Free to the family, packed by us, handed to the kid.</p>
+        <p>No gala, no pity. Just a box, and proof that someone out there is thinking about them.</p>
+        <p class="sig">&mdash; the WonderBox team</p>
       </div>
     </div>
   </section>
 
-  <section class="band alt" id="what">
-    <div class="wrap split">
-      <div class="lead">
-        <h2>What we do</h2>
-        <p>Everything is free to families and run by students.</p>
-      </div>
-      <div class="do-grid">
-        <article class="tilt" data-tone="sage">
-          <h3>Boxes made for each age</h3>
-          <p>Every box is built for one of three age groups, so a toddler and a teenager each get something they actually want.</p>
-          <a class="more" href="#inside">See what's inside</a>
-        </article>
-        <article class="tilt" data-tone="sky">
-          <h3>Gathering the good stuff</h3>
-          <p>We raise money and collect toys, games, books, and comfort items to fill the boxes.</p>
-          <a class="more" href="#donate">Support the drive</a>
-        </article>
-        <article class="tilt" data-tone="butter">
-          <h3>Packed with care</h3>
-          <p>We sort, pack, and check every box ourselves before it goes out.</p>
-          <a class="more" href="#how">See how it works</a>
-        </article>
-        <article class="tilt" data-tone="blush">
-          <h3>Delivered for free</h3>
-          <p>Boxes go to children in the hospital, and their families never pay anything.</p>
-          <a class="more" href="#help">Ways to help</a>
-        </article>
+  <section class="band mission" id="mission" aria-labelledby="mission-k">
+    <svg class="dd mission-heart" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-heart"/></svg>
+    <div class="wrap" data-reveal>
+      <p class="kicker" id="mission-k">our mission</p>
+      <blockquote>WonderBox delivers free, age-tailored care packages to hospitalized children, bringing comfort, joy, and a reminder that they are <span class="hl">not alone</span> during a hard time.</blockquote>
+      <div class="promises"><span>Free to every family</span><span>Built for each age</span><span>Run by students</span></div>
+    </div>
+  </section>
+
+  <section class="band journey" id="journey">
+    <div class="wrap">
+      <header class="sec-head" data-reveal>
+        <p class="kicker">follow the paper plane</p>
+        <h2>How a WonderBox reaches a child</h2>
+      </header>
+      <div class="route" id="route">
+        <svg class="route-svg" id="routeSvg" aria-hidden="true">
+          <defs><mask id="routeMaskEl" maskUnits="userSpaceOnUse"><path class="r-mask" id="routeMask"/></mask></defs>
+          <path class="r-dash" id="routeDash"/>
+          <path class="r-done" id="routeDone" mask="url(#routeMaskEl)"/>
+        </svg>
+        <div class="plane" id="plane" aria-hidden="true"><svg class="dd" viewBox="0 0 100 100" style="fill:#fff"><use href="#d-plane"/></svg></div>
+        <ol class="stops">
+          <li class="stop"><span class="pin"><svg class="dd" viewBox="0 0 100 100" style="fill:var(--butter)" aria-hidden="true"><use href="#d-star"/></svg></span><div class="stop-card"><span class="num">step 1</span><h3>We gather</h3><p>We raise money and collect donated toys, games, books and comfort items.</p></div></li>
+          <li class="stop"><span class="pin"><svg class="dd" viewBox="0 0 100 100" aria-hidden="true"><rect x="16" y="40" width="68" height="48" rx="4" fill="var(--kraft)"/><path d="M16 40 L28 22 H72 L84 40" fill="var(--kraft-l)"/><path d="M50 22 V88" stroke-width="7" stroke="var(--navy-2)"/></svg></span><div class="stop-card"><span class="num">step 2</span><h3>We pack</h3><p>Each box is sorted and packed for one age group, then checked before it goes out.</p></div></li>
+          <li class="stop"><span class="pin"><svg class="dd" viewBox="0 0 100 100" style="fill:var(--coral)" aria-hidden="true"><use href="#d-pin"/></svg></span><div class="stop-card"><span class="num">step 3</span><h3>We deliver</h3><p>Boxes go to pediatric patients at Connecticut Children's in Hartford and New Britain and at Yale New Haven Children's Hospital, at no cost to families.</p></div></li>
+          <li class="stop"><span class="pin"><svg class="dd" viewBox="0 0 100 100" style="fill:var(--blush)" aria-hidden="true"><use href="#d-heart"/></svg></span><div class="stop-card"><span class="num">step 4</span><h3>A child opens it</h3><p>Someone who has spent days indoors gets something that is just for them.</p></div></li>
+        </ol>
       </div>
     </div>
   </section>
 
   <section class="band" id="inside">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2>Three boxes for three ages</h2>
-        <p>A four-year-old and a sixteen-year-old do not want the same thing. Pick an age group to see what goes inside.</p>
-      </div>
-      <div class="tabs" role="tablist" aria-label="Age groups">
-        <button class="tab" role="tab" id="t-toddler" aria-selected="true" aria-controls="p-toddler" type="button">Toddlers</button>
-        <button class="tab" role="tab" id="t-school" aria-selected="false" aria-controls="p-school" type="button" tabindex="-1">School-age</button>
-        <button class="tab" role="tab" id="t-teen" aria-selected="false" aria-controls="p-teen" type="button" tabindex="-1">Teens</button>
-      </div>
-
-      <div class="panel" id="p-toddler" role="tabpanel" aria-labelledby="t-toddler" data-tone="sage">
-        <div>
-          <div class="who">Toddlers</div>
-          <div class="age">Ages 2 to 5</div>
-          <p>Soft, bright, and easy to hold. Comfort comes first for the youngest patients.</p>
-        </div>
-        <ul class="chips">
-          <li>Mini Play-Doh</li><li>4-pack of crayons with coloring sheets</li><li>Board book or sticker book</li><li>Chunky puzzle or stacking cups</li><li>Bath toy or soft block</li>
-        </ul>
-      </div>
-      <div class="panel" id="p-school" role="tabpanel" aria-labelledby="t-school" data-tone="sky" hidden>
-        <div>
-          <div class="who">School-age</div>
-          <div class="age">Ages 6 to 12</div>
-          <p>Things to build, draw, and puzzle over, so long afternoons have something to do.</p>
-        </div>
-        <ul class="chips">
-          <li>4-pack of crayons or colored pencils with coloring sheets</li><li>Word search sheet</li><li>A pencil</li><li>Small LEGO-style set or card game</li><li>Fidget spinner, stress ball, or worry stone</li>
-        </ul>
-      </div>
-      <div class="panel" id="p-teen" role="tabpanel" aria-labelledby="t-teen" data-tone="blush" hidden>
-        <div>
-          <div class="who">Teens</div>
-          <div class="age">Ages 13 to 17</div>
-          <p>Made for teens, not scaled up from a little kid's box. Things that feel like they belong to them.</p>
-        </div>
-        <ul class="chips">
-          <li>Puzzle book</li><li>Pencil or pen with a small journal</li><li>Fidget spinner, stress ball, or worry stone</li><li>Deck of cards</li><li>Adult coloring book or small craft kit</li>
-        </ul>
-      </div>
-      <p class="note">Exact contents change with what donors and partners provide.</p>
-    </div>
-  </section>
-
-  <section class="band alt" id="how">
-    <div class="wrap split">
+    <div class="wrap inside-grid">
       <div>
-        <h2>How a WonderBox reaches a child</h2>
-        <ol class="steps">
-          <li><h3>We gather</h3><p>We raise money and collect donated toys, games, books, and comfort items.</p></li>
-          <li><h3>We pack</h3><p>Each box is sorted and packed for one age group, then checked before it goes out.</p></li>
-          <li><h3>We deliver</h3><p>Boxes are made for pediatric patients at Connecticut Children's in Hartford and Yale New Haven Children's Hospital, at no cost to their families.</p></li>
-          <li><h3>A child opens it</h3><p>Someone who has spent days indoors gets something that is just for them.</p></li>
-        </ol>
+        <header class="sec-head" data-reveal>
+          <p class="kicker">pick a box</p>
+          <h2>Three boxes for three ages</h2>
+          <p>A four-year-old and a sixteen-year-old don't want the same thing. Tap a box to see what goes inside.</p>
+        </header>
+        <div class="picker" role="tablist" aria-label="Age groups">
+          <button class="mini" role="tab" type="button" id="t-tod" aria-controls="p-tod" aria-selected="true" style="--t:var(--sage)"><span class="mini-lid"></span><span class="mini-body"><span class="mini-sticker">ages 2&ndash;5</span></span><span class="mini-name">Toddlers</span></button>
+          <button class="mini" role="tab" type="button" id="t-kid" aria-controls="p-kid" aria-selected="false" tabindex="-1" style="--t:var(--sky)"><span class="mini-lid"></span><span class="mini-body"><span class="mini-sticker">ages 6&ndash;12</span></span><span class="mini-name">School-age</span></button>
+          <button class="mini" role="tab" type="button" id="t-teen" aria-controls="p-teen" aria-selected="false" tabindex="-1" style="--t:var(--blush)"><span class="mini-lid"></span><span class="mini-body"><span class="mini-sticker">ages 13&ndash;17</span></span><span class="mini-name">Teens</span></button>
+        </div>
+        <div class="age-panel" id="p-tod" role="tabpanel" aria-labelledby="t-tod" style="--t:var(--sage)">
+          <div class="range">Ages 2 to 5</div>
+          <p>Soft, bright and easy to hold. Comfort comes first for the youngest patients.</p>
+          <ul class="stickers"><li style="--i:0">Mini Play-Doh</li><li style="--i:1">4-pack of crayons + coloring sheets</li><li style="--i:2">Board book or sticker book</li><li style="--i:3">Chunky puzzle or stacking cups</li><li style="--i:4">Bath toy or soft block</li></ul>
+        </div>
+        <div class="age-panel" id="p-kid" role="tabpanel" aria-labelledby="t-kid" style="--t:var(--sky)" hidden>
+          <div class="range">Ages 6 to 12</div>
+          <p>Things to build, draw and puzzle over, so long afternoons have something to do.</p>
+          <ul class="stickers"><li style="--i:0">Crayons or colored pencils + coloring sheets</li><li style="--i:1">Word search</li><li style="--i:2">A pencil</li><li style="--i:3">Small LEGO-style set or card game</li><li style="--i:4">Fidget spinner, stress ball or worry stone</li></ul>
+        </div>
+        <div class="age-panel" id="p-teen" role="tabpanel" aria-labelledby="t-teen" style="--t:var(--blush)" hidden>
+          <div class="range">Ages 13 to 17</div>
+          <p>Made for teens, not scaled up from a little kid's box. Things that feel like they belong to them.</p>
+          <ul class="stickers"><li style="--i:0">Puzzle book</li><li style="--i:1">Pen + a small journal</li><li style="--i:2">Fidget spinner, stress ball or worry stone</li><li style="--i:3">Deck of cards</li><li style="--i:4">Adult coloring book or small craft kit</li></ul>
+        </div>
+        <p class="fine">Exact contents change with what donors and partners provide.</p>
       </div>
-      <aside class="give">
-        <h3>Where your donation goes</h3>
-        <dl>
-          <div><dt>Items for the boxes</dt><dd>Toys, games, books, and comfort items for every age group.</dd></div>
-          <div><dt>Packaging and delivery</dt><dd>The supplies and the work it takes to get each box to a child.</dd></div>
-        </dl>
-        <p class="free">Families never pay anything.</p>
-      </aside>
+      <figure class="polaroid" data-reveal style="--d:.1s">
+        <img src="img/sample-box.jpg" alt="An open care package with a teddy bear, UNO cards, a puzzle notebook, crayons, stickers, fuzzy socks and a card reading 'You are stronger than you know.'" width="1168" height="784" loading="lazy">
+        <figcaption>a packed box, ready to go</figcaption>
+        <img class="sticker-photo" src="img/age-sticker.jpg" alt="The WonderBox age sticker for the toddler box" width="700" height="769" loading="lazy">
+      </figure>
     </div>
   </section>
 
-  <section class="band" id="help">
+  <section class="band process" id="photos">
     <div class="wrap">
-      <div class="sec-head">
-        <h2>Ways to help</h2>
-        <p>You can fill a box in more than one way.</p>
+      <header class="sec-head" data-reveal>
+        <p class="kicker">behind the boxes</p>
+        <h2>How the boxes actually get made</h2>
+        <p>Three chapters, all documented. Tap any photo to see it bigger.</p>
+      </header>
+      <ol class="chapters" aria-label="Chapters">
+        <li class="on"><b>1</b>Gathering</li>
+        <li class="soon"><b>2</b>Packing <small>soon</small></li>
+        <li class="soon"><b>3</b>Delivering <small>soon</small></li>
+      </ol>
+      <div class="chapter-head" data-reveal>
+        <h3>Chapter 1: The shopping runs</h3>
+        <p>Dollar Tree, Five Below, a lot of carts, and one receipt you have to see to believe.</p>
       </div>
-      <div class="help-grid">
-        <article class="help">
-          <h3>Donate</h3>
-          <p>Your gift pays for the items inside each box and for packaging and delivery.</p>
-          <a class="more js-donate" href="#donate">Give to WonderBox</a>
-        </article>
-        <article class="help">
-          <h3>Host a collection</h3>
-          <p>Gather new toys, games, books, or comfort items at your school, team, or workplace.</p>
-          <a class="more" href="#contact-note">Ask us how</a>
-        </article>
-        <article class="help">
-          <h3>Partner with us</h3>
-          <p>Local businesses can donate items or sponsor boxes for an age group.</p>
-          <a class="more" href="#contact-note">Get in touch</a>
-        </article>
-        <article class="help">
-          <h3>Spread the word</h3>
-          <p>Tell your friends, your school, and your neighbors. Every share reaches another person who can help.</p>
-        </article>
+      <div class="mason" id="mason"></div>
+      <div class="soon-grid">
+        <div class="soon-card" data-reveal><b>Chapter 2</b><h3>Packing the boxes</h3><p>Photos from packing day are coming soon.</p></div>
+        <div class="soon-card" data-reveal style="--d:.1s"><b>Chapter 3</b><h3>Delivering them</h3><p>Photos from the hospital drop-offs are coming soon.</p></div>
       </div>
-      <p class="contact-note" id="contact-note">To host a collection or partner with us, email us at <a href="mailto:wonderboxnpo@gmail.com">wonderboxnpo@gmail.com</a>.</p>
+    </div>
+    <dialog class="lightbox" id="lightbox" aria-label="Photo viewer"><img alt=""><p></p><button class="round lb-x" type="button" id="lbClose" aria-label="Close photo">&times;</button><div class="lb-nav"><button class="round" type="button" id="lbPrev" aria-label="Previous photo">&larr;</button><button class="round" type="button" id="lbNext" aria-label="Next photo">&rarr;</button></div></dialog>
+  </section>
+
+   <section class="band help" id="help">
+    <div class="wrap">
+      <header class="sec-head" data-reveal>
+        <p class="kicker">get involved</p>
+        <h2>There's more than one way to fill a box</h2>
+      </header>
+      <div class="cards">
+        <article class="postcard" data-reveal style="--t:var(--butter)"><span class="stampbox"><svg class="dd" viewBox="0 0 100 100" style="fill:var(--coral)" aria-hidden="true"><use href="#d-heart"/></svg></span><h3>Donate</h3><p>Your gift pays for the items inside each box and for packaging and delivery.</p><a class="go js-donate" href="#donate">Give to WonderBox</a></article>
+        <article class="postcard" data-reveal style="--t:var(--sage);--d:.08s"><span class="stampbox"><svg class="dd" viewBox="0 0 100 100" style="fill:var(--butter)" aria-hidden="true"><use href="#d-star"/></svg></span><h3>Host a collection</h3><p>Gather new toys, games, books or comfort items at your school, team or workplace.</p><a class="go" href="mailto:wonderboxnpo@gmail.com?subject=Hosting%20a%20WonderBox%20collection">Ask us how</a></article>
+        <article class="postcard" data-reveal style="--t:var(--sky);--d:.16s"><span class="stampbox"><svg class="dd" viewBox="0 0 100 100" style="fill:#fff" aria-hidden="true"><use href="#d-plane"/></svg></span><h3>Partner with us</h3><p>Local businesses can donate items or sponsor boxes for an age group.</p><a class="go" href="mailto:wonderboxnpo@gmail.com?subject=Partnering%20with%20WonderBox">Get in touch</a></article>
+        <article class="postcard" data-reveal style="--t:var(--blush);--d:.24s"><span class="stampbox"><svg class="dd" viewBox="0 0 100 100" style="fill:var(--sky)" aria-hidden="true"><use href="#d-spark"/></svg></span><h3>Spread the word</h3><p>Tell your friends, your school and your neighbors. Every share reaches someone who can help.</p><button class="go" type="button" data-share>Share this page</button></article>
+      </div>
+      <div class="where" data-reveal>
+        <div><p class="k">where our boxes go</p><h3>Made for kids at three Connecticut children's hospitals</h3></div>
+        <div class="hosp">
+          <div><svg class="dd" viewBox="0 0 100 100" style="fill:var(--coral);stroke:var(--cream)" aria-hidden="true"><use href="#d-pin"/></svg>Connecticut Children's, Hartford</div>
+          <div><svg class="dd" viewBox="0 0 100 100" style="fill:var(--sky);stroke:var(--cream)" aria-hidden="true"><use href="#d-pin"/></svg>Connecticut Children's, New Britain</div>
+          <div><svg class="dd" viewBox="0 0 100 100" style="fill:var(--butter);stroke:var(--cream)" aria-hidden="true"><use href="#d-pin"/></svg>Yale New Haven Children's Hospital</div>
+        </div>
+      </div>
+      <p class="contact">Questions, collections or partnerships: <a href="mailto:wonderboxnpo@gmail.com">wonderboxnpo@gmail.com</a></p>
     </div>
   </section>
 
-  <section class="band mission" aria-labelledby="mission-label">
-    <div class="wrap">
-      <div class="label" id="mission-label">Our mission</div>
-      <blockquote>WonderBox delivers free, age-tailored care packages to hospitalized children, bringing comfort, joy, and a reminder that they are not alone during a hard time.</blockquote>
-    </div>
-  </section>
-
-  <section class="band" id="donate">
-    <div class="wrap">
-      <div class="donate">
+  <section class="band donate" id="donate">
+    <div class="wrap"><div class="donate-card donate-grid">
+      <div data-reveal>
+        <p class="kicker">every box starts here</p>
         <h2>Help us fill the next box.</h2>
         <p>Your gift covers the items inside each WonderBox and the packaging and delivery that gets it to a child. Families never pay anything.</p>
-        <a class="btn btn-inverse js-donate" id="donate-btn" href="#donate">Donate to WonderBox</a>
+        <div class="give-list">
+          <div><b>items</b><span>Toys, games, books and comfort items for every age group.</span></div>
+          <div><b>delivery</b><span>The supplies and the work it takes to get each box to a child.</span></div>
+        </div>
+        <a class="btn btn-cream js-donate" href="#donate">Donate on Givebutter &rarr;</a>
+        <div class="shot" data-shot hidden><img alt="Screenshot of the WonderBox fundraising page on Givebutter"></div>
       </div>
-    </div>
+      <div class="jar" aria-hidden="true">
+        <img src="wonderbox-logo.png" alt="" width="800" height="800" style="border-radius:40px;border:4px solid var(--cream);box-shadow:12px 12px 0 var(--kraft);transform:rotate(3deg)">
+        <svg class="dd floaty" viewBox="0 0 100 100" style="left:12%;bottom:20%;fill:var(--coral);stroke:var(--cream)"><use href="#d-heart"/></svg>
+        <svg class="dd floaty" viewBox="0 0 100 100" style="left:48%;bottom:8%;fill:var(--butter);stroke:var(--cream);animation-delay:2s"><use href="#d-star"/></svg>
+        <svg class="dd floaty" viewBox="0 0 100 100" style="left:82%;bottom:24%;fill:var(--blush);stroke:var(--cream);animation-delay:4s"><use href="#d-heart"/></svg>
+      </div>
+    </div></div>
   </section>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
     <div class="foot">
-      <a class="brand" href="#top" aria-label="WonderBox home">
-        <img src="wonderbox-logo.png" alt="" width="40" height="40">
-        <span>WonderBox</span>
-      </a>
+      <div>
+        <a class="brand" href="#top" aria-label="WonderBox home"><img src="wonderbox-logo.png" alt="" width="46" height="46"><span>WonderBox</span></a>
+        <p>Free, age-tailored care packages for hospitalized children. Packed by high school students in Connecticut.</p>
+      </div>
       <nav aria-label="Footer">
-        <a href="#story">Our story</a>
-        <a href="#what">What we do</a>
-        <a href="#inside">Inside a box</a>
-        <a href="#help">Ways to help</a>
-        <a href="about.html">About us</a>
-        <a href="#donate">Donate</a>
+        <a href="#story">Our story</a><a href="#journey">How it works</a>
+        <a href="#inside">Inside a box</a><a href="#photos">The process</a>
+        <a href="team.html">Team</a><a href="#help">Get involved</a>
+        <a class="js-donate" href="#donate">Donate</a><a href="mailto:wonderboxnpo@gmail.com">Email us</a>
       </nav>
+      <div class="postmark" aria-hidden="true"><div>SOUTH WINDSOR<b>with love</b>CONNECTICUT</div></div>
     </div>
-    <p class="copy">WonderBox Corp. is a Connecticut nonprofit corporation run by high school students. &copy; 2026 WonderBox Corp.</p>
+    <p class="copy">WonderBox Corp. is a Connecticut nonprofit corporation run by high school students. Email <a href="mailto:wonderboxnpo@gmail.com">wonderboxnpo@gmail.com</a>. &copy; 2026 WonderBox Corp.</p>
   </div>
 </footer>
 
 <script>
-(function () {
-  // Paste the fundraiser page link between the quotes to turn on every Donate button.
-  var DONATE_URL = "https://givebutter.com/WonderBoxFundraisingDrive?s=6O8smw";
+(() => {
+  // Fundraiser link used by every Donate button.
+  const DONATE_URL = "https://givebutter.com/WonderBoxFundraisingDrive?s=6O8smw";
+  // Photos for the strip and the Photos page in the box. Add files to img/ and list them here.
+  const PHOTOS = [
+    { src: "img/shop-01.jpg", caption: "the cart crew", alt: "Three team members standing behind three full shopping carts" },
+    { src: "img/shop-02.jpg", caption: "word-find hunting in the book aisle", alt: "A team member picking out puzzle books in a store aisle" },
+    { src: "img/shop-03.jpg", caption: "journals and notebooks, stacked", alt: "A shopping cart full of notebooks and journals" },
+    { src: "img/shop-04.jpg", caption: "rubber ducks, crayons, Play-Doh and cozy socks", alt: "Three carts loaded with rubber ducks, crayons, Play-Doh and socks" },
+    { src: "img/shop-05.jpg", caption: "fidget spinners and card decks for the older kids", alt: "Two baskets of fidget spinners and playing cards" },
+    { src: "img/shop-06.jpg", caption: "round two at Five Below", alt: "A team member holding two Five Below shopping bags" },
+    { src: "img/shop-07.jpg", caption: "the crew at checkout", alt: "The team with a store employee at checkout" },
+    { src: "img/shop-08.jpg", caption: "sorted at the door, ready to load", alt: "Boxes and baskets of supplies sorted on the floor by the store entrance" },
+    { src: "img/shop-09.jpg", caption: "one receipt. very long.", alt: "Two team members holding a very long receipt in front of a full trunk" },
+    { src: "img/shop-10.jpg", caption: "yes, that is all one receipt", alt: "Two team members holding a long receipt in a parking lot" },
+    { src: "img/shop-11.jpg", caption: "trunk: full. boxes: next.", alt: "A car trunk packed with bags and boxes of supplies" }
+  ];
+  // Screenshot of the Givebutter page, e.g. "img/donation-page.png". Leave empty to hide it.
+  const DONATION_SHOT = "";
 
-  var donateLinks = document.querySelectorAll(".js-donate");
-  for (var i = 0; i < donateLinks.length; i++) {
-    if (DONATE_URL) {
-      donateLinks[i].href = DONATE_URL;
-      donateLinks[i].target = "_blank";
-      donateLinks[i].rel = "noopener";
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const wait = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
+
+  function wireDonate(root) {
+    $$(".js-donate", root).forEach(a => { a.href = DONATE_URL; a.target = "_blank"; a.rel = "noopener"; });
+  }
+  function wireShots(root) {
+    $$("[data-shot]", root).forEach(el => {
+      if (!DONATION_SHOT) return;
+      $("img", el).src = DONATION_SHOT; el.hidden = false;
+    });
+  }
+  function toast(text) {
+    const t = document.createElement("div"); t.className = "toast"; t.setAttribute("role", "status"); t.textContent = text;
+    document.body.appendChild(t); setTimeout(() => t.remove(), 2300);
+  }
+  async function share() {
+    const data = { title: "WonderBox", text: "Free care packages for kids in the hospital, packed by students.", url: location.href.split("#")[0] };
+    try {
+      if (navigator.share) { await navigator.share(data); return; }
+      await navigator.clipboard.writeText(data.url); toast("Link copied. Thanks for sharing!");
+    } catch (e) { if (e && e.name !== "AbortError") toast("Copy this link: " + data.url); }
+  }
+  function wireShare(root) { $$("[data-share]", root).forEach(b => b.addEventListener("click", share)); }
+  wireDonate(document); wireShots(document); wireShare(document);
+
+  /* ---------- The box ---------- */
+  const stageWrap = $("#stageWrap"), stage = $("#stage"), bob = $("#bob"), box = $("#box3d"), scene = $("#scene");
+  const tapeT = $("#tapeT"), tapeF = $("#tapeF");
+  const mA = $("#mA"), mB = $("#mB"), mC = $("#mC"), mM = $("#mM");
+  const peelG = $("#peelG"), peelParts = ["#peelOut", "#peelBody", "#peelShine", "#peelDots"].map(s => $(s)), peelEnd = $("#peelEnd");
+  const hintbox = $("#hintbox"), ghostbox = $("#ghostbox"), fx = $("#fx"), gun = $("#gun");
+  const itemsLayer = $("#items"), items = $$(".item", itemsLayer);
+  const msg = $("#playMsg"), autoBtn = $("#autoBtn"), packBtn = $("#packBtn");
+  const TOP = 210, FRONT = 70, L = TOP + FRONT, SW = 600, SH = 620;
+  let k = 1, state = "sealed", p = 0, drag = null, milestone = 0, interacted = false, heroVisible = true;
+
+  function setState(s) { state = s; stage.dataset.state = s; }
+  const isNarrow = () => k < .8;
+  function sizeWrap() {
+    const tall = stage.classList.contains("tall");
+    stageWrap.style.height = Math.round((tall ? SH + 200 : SH) * k) + "px";
+    stageWrap.style.marginTop = isNarrow() && !tall ? Math.round(-90 * k) + "px" : "0px";
+  }
+  function fit() {
+    k = Math.min(1, stageWrap.clientWidth / SW);
+    stage.style.setProperty("--k", k);
+    stage.classList.toggle("narrow", isNarrow());
+    stage.classList.toggle("tall", isNarrow() && state === "open");
+    sizeWrap();
+    if (state === "open") layoutItems();
+  }
+  function loc(cx, cy) { const r = stage.getBoundingClientRect(); return { x: (cx - r.left) / k, y: (cy - r.top) / k }; }
+  function mpt(el) { const r = el.getBoundingClientRect(); return loc(r.left + r.width / 2, r.top + r.height / 2); }
+  function path3() { return [mpt(mA), mpt(mB), mpt(mC)]; }
+  const lerp = (a, b, t) => ({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t });
+  function at(P, q) { q = Math.max(0, Math.min(L, q)); return q <= TOP ? lerp(P[0], P[1], q / TOP) : lerp(P[1], P[2], (q - TOP) / FRONT); }
+  function angleAt(P, q) { const [a, b] = q < TOP ? [P[0], P[1]] : [P[1], P[2]]; return Math.atan2(b.y - a.y, b.x - a.x); }
+  function project(P, pt) {
+    let best = { q: 0, d: Infinity };
+    [[P[0], P[1], 0, TOP], [P[1], P[2], TOP, FRONT]].forEach(([a, b, q0, len]) => {
+      const vx = b.x - a.x, vy = b.y - a.y, vv = vx * vx + vy * vy || 1;
+      const t = Math.max(0, Math.min(1, ((pt.x - a.x) * vx + (pt.y - a.y) * vy) / vv));
+      const d = Math.hypot(a.x + vx * t - pt.x, a.y + vy * t - pt.y);
+      if (d < best.d) best = { q: q0 + t * len, d };
+    });
+    return best;
+  }
+  function renderTape(mode) {
+    const top = Math.min(p, TOP), fr = Math.max(0, p - TOP);
+    if (mode === "peel") { tapeT.style.clipPath = `inset(${top}px 0 0 0)`; tapeF.style.clipPath = `inset(${fr}px 0 0 0)`; }
+    else { tapeT.style.clipPath = `inset(0 0 ${TOP - top}px 0)`; tapeF.style.clipPath = `inset(0 0 ${FRONT - fr}px 0)`; }
+  }
+  function drawPeel(P, end) {
+    if (p < 1) { peelG.style.display = "none"; return; }
+    peelG.style.display = "";
+    const s = at(P, p), dx = end.x - s.x, dy = end.y - s.y, dist = Math.hypot(dx, dy) || 1;
+    const nx = -dy / dist, ny = dx / dist, side = ny < 0 ? 1 : -1, bow = Math.min(46, dist * .3) * side;
+    const c = { x: s.x + dx * .5 + nx * bow, y: s.y + dy * .5 + ny * bow };
+    const d = `M${s.x.toFixed(1)} ${s.y.toFixed(1)} Q${c.x.toFixed(1)} ${c.y.toFixed(1)} ${end.x.toFixed(1)} ${end.y.toFixed(1)}`;
+    peelParts.forEach(el => el.setAttribute("d", d));
+    const um = Math.hypot(end.x - c.x, end.y - c.y) || 1, u = { x: (end.x - c.x) / um, y: (end.y - c.y) / um }, n = { x: -u.y, y: u.x }, w = 21;
+    const pts = [[end.x - u.x * 3 - n.x * w, end.y - u.y * 3 - n.y * w]];
+    for (let i = 0; i <= 6; i++) { const t = -w + (2 * w * i) / 6, o = i % 2 ? 8 : 1; pts.push([end.x + n.x * t + u.x * o, end.y + n.y * t + u.y * o]); }
+    pts.push([end.x - u.x * 3 + n.x * w, end.y - u.y * 3 + n.y * w]);
+    peelEnd.setAttribute("points", pts.map(q => q[0].toFixed(1) + "," + q[1].toFixed(1)).join(" "));
+  }
+  function droopEnd(P) { const s = at(P, p), len = Math.min(p, 120); return { x: s.x + 30, y: s.y + len * .9 }; }
+  function ripFx(P) {
+    const step = Math.floor((p / L) * 4);
+    if (step <= milestone || step >= 4) return;
+    milestone = step;
+    const s = at(P, p), el = document.createElement("span");
+    el.className = "rip"; el.textContent = ["rrrip!", "riiip!", "almost!"][step - 1];
+    el.style.left = s.x + 40 + "px"; el.style.top = s.y - 10 + "px";
+    fx.appendChild(el); setTimeout(() => el.remove(), 950);
+    if (navigator.vibrate) navigator.vibrate(12);
+  }
+  function burst() {
+    if (reduce) return;
+    const m = mpt(mM), shapes = ["#d-heart", "#d-star", "#d-spark"], fills = ["var(--coral)", "var(--butter)", "var(--sky)", "var(--blush)"];
+    for (let i = 0; i < 16; i++) {
+      const a = Math.PI + (Math.PI * i) / 15 + (Math.random() - .5) * .3, r = 160 + Math.random() * 140;
+      const el = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      el.setAttribute("viewBox", "0 0 100 100"); el.setAttribute("class", "dd burst");
+      el.innerHTML = `<use href="${shapes[i % 3]}"/>`;
+      el.style.cssText = `left:${m.x}px;top:${m.y}px;fill:${fills[i % 4]};--bx:${Math.cos(a) * r}px;--by:${Math.sin(a) * r}px;--br:${(Math.random() * 120 - 60) | 0}deg;animation-delay:${i * 18}ms`;
+      fx.appendChild(el); setTimeout(() => el.remove(), 1500);
     }
   }
-  var main = document.getElementById("donate-btn");
-  if (main && !DONATE_URL) {
-    main.textContent = "Fundraiser link coming soon";
-    main.setAttribute("aria-disabled", "true");
+  function say(text) { msg.textContent = text; }
+
+  const SPOTS = [[-258, -66], [-236, -208], [-118, -272], [0, -298], [118, -272], [236, -208], [258, -66]];
+  const SPOTS_NARROW = [[100, 90], [300, 90], [500, 90], [190, 258], [410, 258], [88, 420], [512, 420]];
+  function layoutItems() {
+    const m = mpt(mM);
+    items.forEach((it, i) => {
+      let x, y;
+      if (isNarrow()) [x, y] = SPOTS_NARROW[i];
+      else { x = m.x + SPOTS[i][0]; y = m.y + SPOTS[i][1]; }
+      it.style.left = m.x + "px"; it.style.top = m.y + "px";
+      it.style.setProperty("--dx", (x - m.x).toFixed(1) + "px");
+      it.style.setProperty("--dy", (y - m.y).toFixed(1) + "px");
+    });
   }
 
-  var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
-  function select(tab) {
-    tabs.forEach(function (t) {
-      var on = t === tab;
-      t.setAttribute("aria-selected", on ? "true" : "false");
-      t.tabIndex = on ? 0 : -1;
-      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+  function hideHints() { interacted = true; ghostbox.style.opacity = ""; hintbox.classList.add("off"); ghostbox.classList.add("off"); }
+  function capture(el, id) { try { el.setPointerCapture(id); } catch (e) {} }
+  function startPeelDrag(e) {
+    if (state !== "sealed") return;
+    const P = path3(), pt = loc(e.clientX, e.clientY), s = at(P, p), pr = project(P, pt);
+    const nearEnd = Math.hypot(pt.x - s.x, pt.y - s.y) < 74;
+    const onTape = pr.d < 40 && pr.q >= p - 30;
+    if (!nearEnd && !onTape) {
+      bob.classList.remove("shake"); void bob.offsetWidth; bob.classList.add("shake");
+      setTimeout(() => bob.classList.remove("shake"), 520);
+      say("Grab the navy tape on top and drag it toward you.");
+      return;
+    }
+    e.preventDefault();
+    capture(scene, e.pointerId);
+    drag = { id: e.pointerId, mode: "peel" };
+    stage.classList.add("dragging", "started"); hideHints();
+    peelMove(pt);
+  }
+  function peelMove(pt) {
+    const P = path3(), pr = project(P, pt);
+    if (pr.d < 170 && pr.q > p) p = pr.q;
+    renderTape("peel"); drawPeel(P, pt); ripFx(P);
+    if (p >= L - 8) finishPeel();
+  }
+  async function finishPeel() {
+    if (state !== "sealed") return;
+    p = L; drag = null; setState("opening"); stage.classList.remove("dragging");
+    renderTape("peel");
+    peelG.classList.add("fall");
+    await wait(160);
+    box.classList.add("open"); burst();
+    await wait(650);
+    peelG.classList.remove("fall"); peelG.style.display = "none";
+    showItems();
+  }
+  async function showItems() {
+    setState("open");
+    if (isNarrow()) { stage.classList.add("tall"); sizeWrap(); await wait(480); }
+    layoutItems(); itemsLayer.inert = false;
+    items.forEach((it, i) => setTimeout(() => it.classList.add("out"), reduce ? 0 : i * 75));
+    say("Tap anything that popped out to jump to that part of the site.");
+    autoBtn.hidden = true; packBtn.hidden = false;
+  }
+  function autoPeel() {
+    if (state !== "sealed") return;
+    hideHints(); stage.classList.add("started");
+    if (reduce) { finishPeel(); return; }
+    const start = p, t0 = performance.now(), dur = 1300;
+    const step = now => {
+      if (state !== "sealed") return;
+      const t = Math.min(1, (now - t0) / dur), e = t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+      p = start + (L - start) * e;
+      const P = path3(), lead = at(P, Math.min(L, p + 40));
+      renderTape("peel"); drawPeel(P, { x: lead.x + 40, y: lead.y - 70 }); ripFx(P);
+      if (t < 1) requestAnimationFrame(step); else finishPeel();
+    };
+    requestAnimationFrame(step);
+  }
+
+  async function packUp() {
+    if (state !== "open") return;
+    setState("closing"); packBtn.hidden = true; itemsLayer.inert = true;
+    items.slice().reverse().forEach((it, i) => setTimeout(() => it.classList.remove("out"), reduce ? 0 : i * 55));
+    await wait(480);
+    box.classList.remove("open");
+    await wait(1050);
+    if (stage.classList.contains("tall")) { stage.classList.remove("tall"); sizeWrap(); await wait(480); }
+    setState("taping"); p = 0; renderTape("seal");
+    gun.hidden = false; placeGun(path3());
+    say("Drag the tape gun along the top seam to seal it back up.");
+    autoBtn.textContent = "Seal it for me"; autoBtn.hidden = false;
+  }
+  function placeGun(P) {
+    const s = at(P, p), a = angleAt(P, Math.min(p, L - 1)), flip = Math.cos(a) < 0 ? " scaleY(-1)" : "";
+    gun.style.transform = `translate(${s.x.toFixed(1)}px, ${s.y.toFixed(1)}px) rotate(${a.toFixed(3)}rad)${flip} translate(-110px, -58px)`;
+  }
+  function sealMove(pt) {
+    const P = path3(), pr = project(P, pt);
+    if (pr.d < 170 && pr.q > p) p = pr.q;
+    renderTape("seal"); placeGun(P);
+    if (p >= L - 8) finishSeal();
+  }
+  async function finishSeal() {
+    if (state !== "taping") return;
+    drag = null; stage.classList.remove("dragging");
+    p = L; renderTape("seal"); gun.hidden = true; autoBtn.hidden = true;
+    const s = document.createElement("div"); s.className = "stamp"; s.innerHTML = "SEALED<small>with love</small>";
+    fx.appendChild(s); setTimeout(() => s.remove(), 2700);
+    p = 0; milestone = 0; renderTape("peel");
+    setState("sealed"); stage.classList.remove("started");
+    say("Sealed with love. Open it again anytime.");
+    await wait(900);
+    autoBtn.textContent = "Open it for me"; autoBtn.hidden = false;
+  }
+  function autoSeal() {
+    if (state !== "taping") return;
+    if (reduce) { finishSeal(); return; }
+    const t0 = performance.now(), start = p, dur = 1100;
+    const step = now => {
+      if (state !== "taping") return;
+      const t = Math.min(1, (now - t0) / dur);
+      p = start + (L - start) * (1 - Math.pow(1 - t, 2));
+      renderTape("seal"); placeGun(path3());
+      if (t < 1) requestAnimationFrame(step); else finishSeal();
+    };
+    requestAnimationFrame(step);
+  }
+
+  scene.addEventListener("pointerdown", startPeelDrag);
+  scene.addEventListener("pointermove", e => { if (drag && drag.mode === "peel" && e.pointerId === drag.id) peelMove(loc(e.clientX, e.clientY)); });
+  const endPeel = e => {
+    if (!drag || drag.mode !== "peel" || e.pointerId !== drag.id) return;
+    drag = null; stage.classList.remove("dragging");
+    if (state === "sealed" && p > 0) say("Keep pulling, it's almost open!");
+  };
+  scene.addEventListener("pointerup", endPeel);
+  scene.addEventListener("pointercancel", endPeel);
+
+  gun.addEventListener("pointerdown", e => {
+    if (state !== "taping") return;
+    e.preventDefault(); capture(gun, e.pointerId);
+    drag = { id: e.pointerId, mode: "seal", sx: e.clientX, sy: e.clientY, moved: false };
+    stage.classList.add("dragging");
+  });
+  gun.addEventListener("pointermove", e => {
+    if (!drag || drag.mode !== "seal" || e.pointerId !== drag.id) return;
+    if (Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy) > 5) drag.moved = true;
+    if (drag.moved) sealMove(loc(e.clientX, e.clientY));
+  });
+  const endSeal = e => {
+    if (!drag || drag.mode !== "seal" || e.pointerId !== drag.id) return;
+    const moved = drag.moved; drag = null; stage.classList.remove("dragging");
+    if (!moved && e.type === "pointerup") autoSeal();
+  };
+  gun.addEventListener("pointerup", endSeal);
+  gun.addEventListener("pointercancel", endSeal);
+  gun.addEventListener("click", e => { if (e.detail === 0) autoSeal(); });
+  autoBtn.addEventListener("click", () => { if (state === "sealed") autoPeel(); else if (state === "taping") autoSeal(); });
+  packBtn.addEventListener("click", packUp);
+
+  function tick(now) {
+    if (heroVisible && state === "sealed" && !drag) {
+      const P = path3();
+      if (p > 0) drawPeel(P, droopEnd(P));
+      if (!interacted) {
+        hintbox.style.transform = `translate(${(P[0].x - 214).toFixed(1)}px, ${(P[0].y - 96).toFixed(1)}px)`;
+        const t = (now % 3200) / 3200, e = t < .7 ? t / .7 : 1, q = (e < .5 ? 2 * e * e : 1 - Math.pow(-2 * e + 2, 2) / 2) * L * .8;
+        const g = at(P, q);
+        ghostbox.style.opacity = t < .08 ? t / .08 : t > .78 ? Math.max(0, 1 - (t - .78) / .12) : 1;
+        ghostbox.style.transform = `translate(${(g.x - 10).toFixed(1)}px, ${(g.y - 4).toFixed(1)}px)`;
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+  if (reduce) ghostbox.hidden = true;
+  new IntersectionObserver(es => { heroVisible = es[0].isIntersecting; }).observe(stageWrap);
+
+  /* ---------- Hero parallax ---------- */
+  const sky = $("#sky");
+  if (!reduce && matchMedia("(pointer: fine)").matches) {
+    $(".hero").addEventListener("pointermove", e => {
+      sky.style.setProperty("--mx", (e.clientX / innerWidth - .5).toFixed(3));
+      sky.style.setProperty("--my", (e.clientY / innerHeight - .5).toFixed(3));
     });
   }
-  tabs.forEach(function (tab, idx) {
-    tab.addEventListener("click", function () { select(tab); });
-    tab.addEventListener("keydown", function (e) {
-      var next = null;
-      if (e.key === "ArrowRight") next = tabs[(idx + 1) % tabs.length];
-      if (e.key === "ArrowLeft") next = tabs[(idx - 1 + tabs.length) % tabs.length];
-      if (next) { e.preventDefault(); select(next); next.focus(); }
+
+  /* ---------- Reveal + counters ---------- */
+  function countUp(el) {
+    const to = +el.dataset.count, suf = el.dataset.suffix || "", t0 = performance.now(), dur = 1200;
+    if (reduce) return;
+    const step = now => {
+      const t = Math.min(1, (now - t0) / dur), v = Math.round(to * (1 - Math.pow(1 - t, 3)));
+      el.textContent = (el.hasAttribute("data-comma") ? v.toLocaleString("en-US") : v) + suf; if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+  const io = new IntersectionObserver(entries => entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    en.target.classList.add("in");
+    $$("[data-count]", en.target).forEach(countUp);
+    io.unobserve(en.target);
+  }), { threshold: .2, rootMargin: "0px 0px -8% 0px" });
+  $$("[data-reveal]").forEach(el => io.observe(el));
+
+  /* ---------- Journey route ---------- */
+  const route = $("#route"), rsvg = $("#routeSvg"), rDash = $("#routeDash"), rDone = $("#routeDone"), rMask = $("#routeMask"), plane = $("#plane"), stops = $$(".stop", route);
+  let rLen = 0, stopAt = [];
+  function buildRoute() {
+    const rr = route.getBoundingClientRect(), w = route.clientWidth, h = route.clientHeight;
+    rsvg.setAttribute("viewBox", `0 0 ${w} ${h}`); rsvg.setAttribute("width", w); rsvg.setAttribute("height", h);
+    const pts = stops.map(s => { const r = $(".pin", s).getBoundingClientRect(); return { x: r.left + r.width / 2 - rr.left, y: r.top + r.height / 2 - rr.top }; });
+    const all = [{ x: pts[0].x, y: 0 }, ...pts, { x: pts[pts.length - 1].x, y: h }];
+    const amp = w > 760 ? 150 : 34;
+    let d = `M${all[0].x} ${all[0].y}`;
+    for (let i = 1; i < all.length; i++) {
+      const a = all[i - 1], b = all[i], dy = b.y - a.y, s = i % 2 ? 1 : -1;
+      d += ` C${a.x + amp * s} ${a.y + dy * .45} ${b.x + amp * s} ${b.y - dy * .45} ${b.x} ${b.y}`;
+    }
+    [rDash, rDone, rMask].forEach(el => el.setAttribute("d", d));
+    rLen = rDone.getTotalLength();
+    rMask.style.strokeDasharray = rLen;
+    stopAt = pts.map(pt => {
+      let best = 0, bd = Infinity;
+      for (let l = 0; l <= rLen; l += 5) { const q = rDone.getPointAtLength(l), dd = (q.x - pt.x) ** 2 + (q.y - pt.y) ** 2; if (dd < bd) { bd = dd; best = l; } }
+      return best;
+    });
+    updateRoute();
+  }
+  function updateRoute() {
+    if (!rLen) return;
+    const rr = route.getBoundingClientRect();
+    const prog = Math.max(0, Math.min(1, (innerHeight * .6 - rr.top) / rr.height));
+    const l = prog * rLen;
+    rMask.style.strokeDashoffset = rLen - l;
+    const a = rDone.getPointAtLength(l), b = rDone.getPointAtLength(Math.min(rLen, l + 3)), c = rDone.getPointAtLength(Math.max(0, l - 3));
+    const ang = Math.atan2(b.y - c.y, b.x - c.x);
+    plane.style.transform = `translate(${(a.x - 32).toFixed(1)}px, ${(a.y - 32).toFixed(1)}px) rotate(${(ang + .38).toFixed(3)}rad)`;
+    stops.forEach((s, i) => s.classList.toggle("reached", reduce || l >= stopAt[i] - 6));
+  }
+
+  /* ---------- Age picker ---------- */
+  const tabs = $$(".mini");
+  function selectTab(t, focus) {
+    tabs.forEach(x => {
+      const on = x === t;
+      x.setAttribute("aria-selected", on); x.tabIndex = on ? 0 : -1;
+      document.getElementById(x.getAttribute("aria-controls")).hidden = !on;
+    });
+    if (focus) t.focus();
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => selectTab(t));
+    t.addEventListener("keydown", e => {
+      const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (d) { e.preventDefault(); selectTab(tabs[(i + d + tabs.length) % tabs.length], true); }
     });
   });
+
+  /* ---------- Process gallery ---------- */
+  const mason = $("#mason"), lb = $("#lightbox"), lbImg = $("img", lb), lbCap = $("p", lb);
+  let lbI = 0;
+  function showLb(i) { lbI = (i + PHOTOS.length) % PHOTOS.length; lbImg.src = PHOTOS[lbI].src; lbImg.alt = PHOTOS[lbI].alt; lbCap.textContent = PHOTOS[lbI].caption; }
+  PHOTOS.forEach((ph, i) => {
+    const f = document.createElement("figure"); f.className = "pol"; f.dataset.reveal = ""; f.style.setProperty("--r", [-2, 1.6, -1, 2.2, -1.8, 1.2][i % 6] + "deg");
+    const b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-label", "View photo: " + ph.caption);
+    const img = new Image(); img.src = ph.src; img.alt = ph.alt; img.loading = "lazy"; img.width = 1000; img.height = 1000;
+    const cap = document.createElement("figcaption"); cap.textContent = ph.caption;
+    b.appendChild(img); f.append(b, cap); mason.appendChild(f); io.observe(f);
+    b.addEventListener("click", () => { showLb(i); lb.showModal(); });
+  });
+  $("#lbClose").addEventListener("click", () => lb.close());
+  $("#lbPrev").addEventListener("click", () => showLb(lbI - 1));
+  $("#lbNext").addEventListener("click", () => showLb(lbI + 1));
+  lb.addEventListener("click", e => { if (e.target === lb) lb.close(); });
+  lb.addEventListener("keydown", e => { if (e.key === "ArrowRight") showLb(lbI + 1); if (e.key === "ArrowLeft") showLb(lbI - 1); });
+
+  /* ---------- Scroll progress + layout ---------- */
+  const bar = $("#progress");
+  let ticking = false;
+  function onScroll() {
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(() => {
+      document.documentElement.style.setProperty("--sy", scrollY);
+      const max = document.documentElement.scrollHeight - innerHeight;
+      bar.style.transform = `scaleX(${max > 0 ? (scrollY / max).toFixed(4) : 0})`;
+      updateRoute(); ticking = false;
+    });
+  }
+  addEventListener("scroll", onScroll, { passive: true });
+  let rT = 0;
+  addEventListener("resize", () => { clearTimeout(rT); rT = setTimeout(() => { fit(); buildRoute(); }, 120); });
+
+  fit(); renderTape("peel");
+  requestAnimationFrame(tick);
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => { buildRoute(); onScroll(); });
+  addEventListener("load", buildRoute);
 })();
 </script>
 </body>
