@@ -68,7 +68,7 @@ p { margin: 0; }
 /* Header */
 .progress { position: fixed; inset: 0 0 auto; height: 6px; z-index: 70; pointer-events: none; }
 .progress i { display: block; height: 100%; width: 100%; transform-origin: 0 50%; transform: scaleX(0); background: repeating-linear-gradient(90deg, var(--navy-2) 0 22px, var(--navy) 22px 26px); }
-.site-header { position: sticky; top: 0; z-index: 60; background: rgba(251, 245, 234, .86); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 2px dashed rgba(28, 43, 77, .22); }
+.site-header { position: sticky; top: 0; z-index: 60; background: rgba(251, 245, 234, .97); border-bottom: 2px dashed rgba(28, 43, 77, .22); }
 .bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 72px; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font: 750 24px/1 var(--display); font-variation-settings: "SOFT" 100, "WONK" 1; color: var(--navy); }
 .brand img { width: 46px; height: 46px; border-radius: 14px; background: var(--paper); border: 2.5px solid var(--navy); padding: 2px; transition: transform .3s; }
@@ -524,3 +524,14 @@ main > section, main > .tapes { position: relative; z-index: 1; }
 }
 @media (prefers-reduced-motion: reduce) { .belt-top, .side-front .barcode::after { animation: none; } }
 .team-page .side-front .role { min-height: 2.6em; display: flex; align-items: center; justify-content: center; }
+
+/* ---------- Next drive ---------- */
+.drive-grid { display: grid; gap: clamp(28px, 5vw, 64px); grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: center; }
+.drive-copy p:not(.kicker) { margin-top: 16px; font-size: 19px; color: var(--ink-soft); }
+.drive-copy .btn { margin-top: 24px; }
+.browser { margin: 0; border: 3px solid var(--navy); border-radius: 18px; overflow: hidden; background: #fff; box-shadow: 10px 10px 0 var(--navy); transform: rotate(1.2deg); }
+.browser-bar { display: flex; gap: 7px; padding: 11px 14px; background: var(--cream-2); border-bottom: 3px solid var(--navy); }
+.browser-bar i { width: 11px; height: 11px; border-radius: 50%; background: var(--navy); opacity: .35; }
+.browser img { display: block; width: 100%; height: auto; }
+@media (max-width: 900px) { .drive-grid { grid-template-columns: minmax(0, 1fr); } .browser { transform: none; } }
+html { overflow-x: clip; }

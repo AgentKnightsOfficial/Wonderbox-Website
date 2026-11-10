@@ -320,6 +320,21 @@
     <dialog class="lightbox" id="lightbox" aria-label="Photo viewer"><img alt=""><button class="round lb-x" type="button" id="lbClose" aria-label="Close photo">&times;</button><div class="lb-nav"><button class="round" type="button" id="lbPrev" aria-label="Previous photo">&larr;</button><button class="round" type="button" id="lbNext" aria-label="Next photo">&rarr;</button></div></dialog>
   </section>
 
+  <section class="band drive" id="drive">
+    <div class="wrap drive-grid">
+      <div class="drive-copy" data-reveal>
+        <p class="kicker">our fundraiser</p>
+        <h2>Help us with our <span class="hl">next drive!</span></h2>
+        <p>Our first drive raised nearly $3,400 from 72 supporters. Every dollar went into boxes for kids in the hospital, and the next drive is how we keep them coming.</p>
+        <a class="btn js-donate" href="#donate">Donate to the next drive</a>
+      </div>
+      <figure class="browser" data-reveal style="--d:.12s">
+        <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+        <img src="img/donation-page.jpg" alt="The WonderBox Fundraiser Drive page showing $3,389 raised, 96% of the $3,500 goal, from 72 supporters" width="1200" height="864" loading="lazy" decoding="async">
+      </figure>
+    </div>
+  </section>
+
    <section class="band help" id="help">
     <div class="wrap">
       <header class="sec-head" data-reveal>
@@ -391,19 +406,17 @@
   // Fundraiser link used by every Donate button.
   // Photos for the strip and the Photos page in the box. Add files to img/ and list them here.
   const PHOTOS = [
-    { src: "img/shop-13.jpg", caption: "", alt: "Four teens and a woman smiling for a selfie in a parking lot in front of a car trunk full of supplies" },
-    { src: "img/shop-07.jpg", caption: "the crew at checkout", alt: "The team with a store employee at checkout" },
-    { src: "img/shop-14.jpg", caption: "", alt: "A team member reaching for a box of crayons on a store shelf next to a shopping cart" },
-    { src: "img/shop-03.jpg", caption: "journals and notebooks, stacked", alt: "A shopping cart full of notebooks and journals" },
-    { src: "img/shop-10.jpg", caption: "yes, that is all one receipt", alt: "Two team members holding a long receipt in a parking lot" },
-    { src: "img/shop-12.jpg", caption: "", alt: "Baskets and paper bags of supplies sorted on a mat with boxes of puzzle books, notepads, rubber ducks and a long receipt" },
-    { src: "img/shop-05.jpg", caption: "fidget spinners and card decks for the older kids", alt: "Two baskets of fidget spinners and playing cards" },
-    { src: "img/shop-01.jpg", caption: "the cart crew", alt: "Three team members standing behind three full shopping carts" },
-    { src: "img/shop-15.jpg", caption: "", alt: "Three team members sorting supplies into paper bags and baskets beside a car at night" },
-    { src: "img/shop-09.jpg", caption: "one receipt. very long.", alt: "Two team members holding a very long receipt in front of a full trunk" },
-    { src: "img/shop-04.jpg", caption: "rubber ducks, crayons, Play-Doh and cozy socks", alt: "Three carts loaded with rubber ducks, crayons, Play-Doh and socks" },
-    { src: "img/shop-11.jpg", caption: "trunk: full. boxes: next.", alt: "A car trunk packed with bags and boxes of supplies" },
-    { src: "img/shop-02.jpg", caption: "word-find hunting in the book aisle", alt: "A team member picking out puzzle books in a store aisle" }
+    { src: "img/shop-13.jpg", w: 1000, h: 750, caption: "", alt: "Four teens and a woman smiling for a selfie in a parking lot in front of a car trunk full of supplies" },
+    { src: "img/shop-07.jpg", w: 562, h: 1000, caption: "the crew at checkout", alt: "The team with a store employee at checkout" },
+    { src: "img/shop-14.jpg", w: 750, h: 1000, caption: "", alt: "A team member reaching for a box of crayons on a store shelf next to a shopping cart" },
+    { src: "img/shop-12.jpg", w: 750, h: 1000, caption: "", alt: "Baskets and paper bags of supplies sorted on a mat with boxes of puzzle books, notepads, rubber ducks and a long receipt" },
+    { src: "img/shop-05.jpg", w: 750, h: 1000, caption: "fidget spinners and card decks for the older kids", alt: "Two baskets of fidget spinners and playing cards" },
+    { src: "img/shop-01.jpg", w: 1000, h: 562, caption: "the cart crew", alt: "Three team members standing behind three full shopping carts" },
+    { src: "img/shop-15.jpg", w: 893, h: 1000, caption: "", alt: "Three team members sorting supplies into paper bags and baskets beside a car at night" },
+    { src: "img/shop-09.jpg", w: 562, h: 1000, caption: "one receipt. very long.", alt: "Two team members holding a very long receipt in front of a full trunk" },
+    { src: "img/shop-04.jpg", w: 1000, h: 562, caption: "rubber ducks, crayons, Play-Doh and cozy socks", alt: "Three carts loaded with rubber ducks, crayons, Play-Doh and socks" },
+    { src: "img/shop-11.jpg", w: 1000, h: 562, caption: "trunk: full. boxes: next.", alt: "A car trunk packed with bags and boxes of supplies" },
+    { src: "img/shop-02.jpg", w: 562, h: 1000, caption: "word-find hunting in the book aisle", alt: "A team member picking out puzzle books in a store aisle" }
   ];
   // Screenshot of the Givebutter page, e.g. "img/donation-page.png". Leave empty to hide it.
   const DONATION_SHOT = "";
@@ -783,7 +796,7 @@
   PHOTOS.forEach((ph, i) => {
     const f = document.createElement("figure"); f.className = "pol"; f.dataset.reveal = ""; f.style.setProperty("--r", [-2, 1.6, -1, 2.2, -1.8, 1.2][i % 6] + "deg");
     const b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-label", "View photo: " + ph.alt);
-    const img = new Image(); img.src = ph.src; img.alt = ph.alt; img.loading = "lazy"; img.width = 1000; img.height = 1000;
+    const img = new Image(); img.src = ph.src; img.alt = ph.alt; img.loading = "lazy"; img.decoding = "async"; img.width = ph.w; img.height = ph.h;
     b.appendChild(img); f.append(b); figs.push(f); io.observe(f);
     b.addEventListener("click", () => { showLb(i); lb.showModal(); });
   });
@@ -795,7 +808,18 @@
     if (n === cols) return;
     cols = n; mason.textContent = "";
     const cs = Array.from({ length: n }, () => { const c = document.createElement("div"); c.className = "mason-col"; mason.appendChild(c); return c; });
-    figs.forEach((f, i) => cs[i % n].appendChild(f));
+    // Try every way of dealing the photos into columns (first two stay in the top row) and keep the most even one.
+    const colW = Math.max(120, (w - 30 * (n - 1)) / n), hh = PHOTOS.map(ph => colW * (ph.h / ph.w) + 70);
+    const N = figs.length, fixed = Math.min(n, 2), free = N - fixed;
+    let best = null, bestScore = Infinity;
+    for (let m = 0, total = Math.pow(n, free); m < total; m++) {
+      const as = [0, 1].slice(0, fixed), hs = new Array(n).fill(0);
+      for (let i = 0; i < fixed; i++) hs[i] = hh[i];
+      for (let i = 0, r = m; i < free; i++, r = Math.floor(r / n)) { as.push(r % n); hs[r % n] += hh[fixed + i]; }
+      const score = Math.max(...hs) - Math.min(...hs);
+      if (score < bestScore) { bestScore = score; best = as; }
+    }
+    figs.forEach((f, i) => cs[best[i]].appendChild(f));
   }
   layoutPhotos(); addEventListener("resize", layoutPhotos);
   $("#lbClose").addEventListener("click", () => lb.close());
@@ -805,15 +829,17 @@
   lb.addEventListener("keydown", e => { if (e.key === "ArrowRight") showLb(lbI + 1); if (e.key === "ArrowLeft") showLb(lbI - 1); });
 
   /* ---------- Scroll progress + layout ---------- */
-  const bar = $("#progress");
+  const bar = $("#progress"), bgfx = $(".bg-fx");
   let ticking = false;
   function onScroll() {
     if (ticking) return; ticking = true;
     requestAnimationFrame(() => {
-      document.documentElement.style.setProperty("--sy", scrollY);
+      if (scrollY < innerHeight * 6) bgfx.style.setProperty("--sy", scrollY);
       const max = document.documentElement.scrollHeight - innerHeight;
       bar.style.transform = `scaleX(${max > 0 ? (scrollY / max).toFixed(4) : 0})`;
-      updateRoute(); ticking = false;
+      const rb = route.getBoundingClientRect();
+      if (rb.bottom > -200 && rb.top < innerHeight + 200) updateRoute();
+      ticking = false;
     });
   }
   addEventListener("scroll", onScroll, { passive: true });

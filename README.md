@@ -21,10 +21,10 @@ These settings are at the top of the `<script>` near the end of `index.html`.
 
 - **Donate buttons:** they deliberately go nowhere right now. To link them again, set `a.href` in `wireDonate` in `index.html` and in the inline script of `team.html`.
 - **Photos:** drop the image into `img/`, then add a line to `PHOTOS`, for example
-  `{ src: "img/shopping-trip.jpg", alt: "The team shopping for toys" },`
-  (Photos show without captions; `alt` is only for screen readers.)
+  `{ src: "img/shopping-trip.jpg", w: 1000, h: 750, alt: "The team shopping for toys" },`
+  (`w` and `h` are the image's pixel width and height, used to balance the columns. Photos show without captions; `alt` is only for screen readers. Keep images under about 1000px wide to keep the page fast.)
   New photos appear in the Chapter 1 gallery.
-- **Donation page screenshot:** put it in `img/` and set `DONATION_SHOT = "img/donation-page.png"`.
+- **Fundraiser screenshot:** it lives in the "Help us with our next drive!" section. To update it, replace `img/donation-page.jpg` (and the numbers in that section's text).
 
 Text lives in the HTML:
 
