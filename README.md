@@ -17,11 +17,12 @@ No build step is needed. Open `index.html` in a browser to preview.
 
 ## Common edits
 
-All three settings are at the top of the `<script>` near the end of `index.html`.
+These settings are at the top of the `<script>` near the end of `index.html`.
 
-- **Donate link:** change `DONATE_URL`.
+- **Donate buttons:** they deliberately go nowhere right now. To link them again, set `a.href` in `wireDonate` in `index.html` and in the inline script of `team.html`.
 - **Photos:** drop the image into `img/`, then add a line to `PHOTOS`, for example
-  `{ src: "img/shopping-trip.jpg", caption: "our first shopping run", alt: "The team shopping for toys" },`
+  `{ src: "img/shopping-trip.jpg", alt: "The team shopping for toys" },`
+  (Photos show without captions; `alt` is only for screen readers.)
   New photos appear in the Chapter 1 gallery.
 - **Donation page screenshot:** put it in `img/` and set `DONATION_SHOT = "img/donation-page.png"`.
 

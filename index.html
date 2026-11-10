@@ -212,16 +212,15 @@
     <div class="wrap story-grid">
       <div class="story-lead" data-reveal>
         <p class="kicker">the origin</p>
-        <h2>We saw the gap. So we <span class="hl">built the box.</span></h2>
-        <p>The care in these hospitals is incredible. But the kid in the bed still has a very long day to fill, a long way from home.</p>
+        <h2>Why we started <span class="hl">WonderBox</span></h2>
+        <p>A hospital stay is long, especially when you&rsquo;re a kid. We wanted to make it a little easier.</p>
         <p class="story-cta"><a class="btn btn-sm" href="team.html">Meet the team</a></p>
       </div>
       <div class="notebook" data-reveal style="--d:.12s">
         <svg class="dd doodle" viewBox="0 0 100 100" style="fill:var(--butter)" aria-hidden="true"><use href="#d-star"/></svg>
-        <p>We're high schoolers who volunteer in Connecticut hospitals. Between shifts you notice things: kids stuck inside for days or weeks, away from home, their friends, their stuff.</p>
-        <p>Medicine handles the illness. Nobody really has the time to make the day feel less long.</p>
-        <p>So we made that our thing. One box per age group, filled with what we'd actually want at 4, at 10, at 16. Free to the family, packed by us, handed to the kid.</p>
-        <p>No gala, no pity. Just a box, and proof that someone out there is thinking about them.</p>
+        <p>We volunteer at hospitals around Connecticut, and one thing we all kept noticing was how bored and homesick the kids were, especially the ones staying more than a night or two. The doctors and nurses are focused on getting them better, which is exactly what they should be doing. But there isn&rsquo;t always someone free to keep a ten-year-old company all afternoon.</p>
+        <p>So we started making care packages. We put together different boxes for young kids, preteens, and teens, because what helps a five-year-old pass the time isn&rsquo;t what helps a sixteen-year-old. Everything is paid for &amp; packed, so families never pay a thing.</p>
+        <p>So far, with a lot of help from our community, we&rsquo;ve raised $3k+ and teamed up with three hospitals to get boxes to 120+ kids. It&rsquo;s a small thing, but we hope it makes the day go by a little faster.</p>
         <p class="sig">&mdash; the WonderBox team</p>
       </div>
     </div>
@@ -291,7 +290,6 @@
       </div>
       <figure class="polaroid" data-reveal style="--d:.1s">
         <img src="img/sample-box.jpg" alt="An open care package with a teddy bear, UNO cards, a puzzle notebook, crayons, stickers, fuzzy socks and a card reading 'You are stronger than you know.'" width="1168" height="784" loading="lazy">
-        <figcaption>a packed box, ready to go</figcaption>
         <img class="sticker-photo" src="img/age-sticker.jpg" alt="The WonderBox age sticker for the toddler box" width="700" height="769" loading="lazy">
       </figure>
     </div>
@@ -319,7 +317,7 @@
         <div class="soon-card" data-reveal style="--d:.1s"><b>Chapter 3</b><h3>Delivering them</h3><p>Photos from the hospital drop-offs are coming soon.</p></div>
       </div>
     </div>
-    <dialog class="lightbox" id="lightbox" aria-label="Photo viewer"><img alt=""><p></p><button class="round lb-x" type="button" id="lbClose" aria-label="Close photo">&times;</button><div class="lb-nav"><button class="round" type="button" id="lbPrev" aria-label="Previous photo">&larr;</button><button class="round" type="button" id="lbNext" aria-label="Next photo">&rarr;</button></div></dialog>
+    <dialog class="lightbox" id="lightbox" aria-label="Photo viewer"><img alt=""><button class="round lb-x" type="button" id="lbClose" aria-label="Close photo">&times;</button><div class="lb-nav"><button class="round" type="button" id="lbPrev" aria-label="Previous photo">&larr;</button><button class="round" type="button" id="lbNext" aria-label="Next photo">&rarr;</button></div></dialog>
   </section>
 
    <section class="band help" id="help">
@@ -356,7 +354,7 @@
           <div><b>items</b><span>Toys, games, books and comfort items for every age group.</span></div>
           <div><b>delivery</b><span>The supplies and the work it takes to get each box to a child.</span></div>
         </div>
-        <a class="btn btn-cream js-donate" href="#donate">Donate on Givebutter &rarr;</a>
+        <a class="btn btn-cream js-donate" href="#donate">Donate &rarr;</a>
         <div class="shot" data-shot hidden><img alt="Screenshot of the WonderBox fundraising page on Givebutter"></div>
       </div>
       <div class="jar" aria-hidden="true">
@@ -391,7 +389,6 @@
 <script>
 (() => {
   // Fundraiser link used by every Donate button.
-  const DONATE_URL = "https://givebutter.com/WonderBoxFundraisingDrive?s=6O8smw";
   // Photos for the strip and the Photos page in the box. Add files to img/ and list them here.
   const PHOTOS = [
     { src: "img/shop-01.jpg", caption: "the cart crew", alt: "Three team members standing behind three full shopping carts" },
@@ -415,7 +412,7 @@
   const wait = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
 
   function wireDonate(root) {
-    $$(".js-donate", root).forEach(a => { a.href = DONATE_URL; a.target = "_blank"; a.rel = "noopener"; });
+    $$(".js-donate", root).forEach(a => { a.removeAttribute("href"); a.setAttribute("role", "button"); a.tabIndex = 0; });
   }
   function wireShots(root) {
     $$("[data-shot]", root).forEach(el => {
@@ -777,15 +774,14 @@
   });
 
   /* ---------- Process gallery ---------- */
-  const mason = $("#mason"), lb = $("#lightbox"), lbImg = $("img", lb), lbCap = $("p", lb);
+  const mason = $("#mason"), lb = $("#lightbox"), lbImg = $("img", lb);
   let lbI = 0;
-  function showLb(i) { lbI = (i + PHOTOS.length) % PHOTOS.length; lbImg.src = PHOTOS[lbI].src; lbImg.alt = PHOTOS[lbI].alt; lbCap.textContent = PHOTOS[lbI].caption; }
+  function showLb(i) { lbI = (i + PHOTOS.length) % PHOTOS.length; lbImg.src = PHOTOS[lbI].src; lbImg.alt = PHOTOS[lbI].alt; }
   PHOTOS.forEach((ph, i) => {
     const f = document.createElement("figure"); f.className = "pol"; f.dataset.reveal = ""; f.style.setProperty("--r", [-2, 1.6, -1, 2.2, -1.8, 1.2][i % 6] + "deg");
-    const b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-label", "View photo: " + ph.caption);
+    const b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-label", "View photo: " + ph.alt);
     const img = new Image(); img.src = ph.src; img.alt = ph.alt; img.loading = "lazy"; img.width = 1000; img.height = 1000;
-    const cap = document.createElement("figcaption"); cap.textContent = ph.caption;
-    b.appendChild(img); f.append(b, cap); mason.appendChild(f); io.observe(f);
+    b.appendChild(img); f.append(b); mason.appendChild(f); io.observe(f);
     b.addEventListener("click", () => { showLb(i); lb.showModal(); });
   });
   $("#lbClose").addEventListener("click", () => lb.close());
