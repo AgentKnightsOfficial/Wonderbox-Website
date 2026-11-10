@@ -292,7 +292,7 @@ p { margin: 0; }
 @media (max-width: 900px) { .inside-grid { grid-template-columns: minmax(0, 1fr); } .polaroid { max-width: 520px; margin-inline: auto; } }
 
 /* Team */
-.team-grid { display: grid; gap: 30px; grid-template-columns: repeat(3, minmax(0, 1fr)); perspective: 1600px; }
+.team-grid { display: grid; gap: 30px; grid-template-columns: repeat(4, minmax(0, 1fr)); perspective: 1600px; }
 .slip { position: relative; height: 430px; }
 .slip-card { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .8s cubic-bezier(.34, 1.2, .5, 1); }
 .slip.flipped .slip-card { transform: rotateY(180deg); }
@@ -427,7 +427,8 @@ p { margin: 0; }
 .chapter-head { max-width: 40rem; margin-bottom: 36px; }
 .chapter-head h3 { font-size: clamp(26px, 3.2vw, 36px); }
 .chapter-head p { margin-top: 10px; color: var(--ink-soft); font-size: 18px; }
-.mason { columns: 3 280px; column-gap: 30px; }
+.mason { display: flex; align-items: flex-start; gap: 30px; }
+.mason-col { flex: 1 1 0; min-width: 0; }
 .pol { break-inside: avoid; margin: 0 0 32px; padding: 12px 12px 10px; background: #fff; border: 3px solid var(--navy); border-radius: 6px; box-shadow: 7px 7px 0 var(--navy); transform: rotate(var(--r, 0deg)); transition: transform .3s; }
 .pol:hover { transform: rotate(0deg) translateY(-6px); }
 .pol button { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
@@ -438,7 +439,7 @@ p { margin: 0; }
 .soon-card b { font: 700 24px/1 var(--hand); color: var(--coral); }
 .soon-card h3 { margin-top: 6px; }
 .soon-card p { margin-top: 8px; color: var(--ink-soft); }
-@media (max-width: 640px) { .soon-grid { grid-template-columns: minmax(0, 1fr); } .mason { columns: 2 150px; column-gap: 16px; } .pol { padding: 8px 8px 6px; margin-bottom: 20px; box-shadow: 4px 4px 0 var(--navy); } .pol figcaption { font-size: 18px; } }
+@media (max-width: 640px) { .soon-grid { grid-template-columns: minmax(0, 1fr); } .mason { gap: 16px; } .pol { padding: 8px 8px 6px; margin-bottom: 20px; box-shadow: 4px 4px 0 var(--navy); } .pol figcaption { font-size: 18px; } }
 .round { width: 52px; height: 52px; border-radius: 50%; border: 3px solid var(--navy); background: var(--paper); box-shadow: 0 4px 0 var(--navy); cursor: pointer; font: 800 22px/1 var(--body); display: grid; place-items: center; }
 .round:hover { background: var(--butter); }
 .lightbox { border: 3px solid var(--navy); border-radius: 18px; padding: 14px; background: #fff; box-shadow: 10px 10px 0 var(--navy); max-width: min(92vw, 900px); overflow: visible; }
@@ -454,7 +455,9 @@ p { margin: 0; }
 .page-hero .lede { margin-top: 20px; max-width: 32em; font-size: 20px; color: var(--ink-soft); }
 .team-page .slip { height: 500px; }
 .avatar.photo { width: 150px; height: 150px; margin-bottom: 14px; }
-.avatar.photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.avatar.photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; border-radius: 50%; }
+.avatar.photo.gray { background: none; }
+.avatar.photo.gray svg { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 50%; background: #C9CDD3; fill: #9BA1AA; }
 .team-note { margin-top: 36px; text-align: center; font: 700 26px/1.2 var(--hand); color: var(--navy-3); }
 
 /* ===== Flow: one continuous page ===== */
@@ -490,3 +493,34 @@ main > section, main > .tapes { position: relative; z-index: 1; }
 .site-footer { border-radius: 48px 48px 0 0; }
 .tapes { margin-block: -6px; }
 @media (max-width: 900px) { .mission .wrap { border-radius: 28px; } }
+
+/* ---------- Team: checkout belt ---------- */
+.team-page .slip { height: 390px; }
+.team-page .side { padding: 28px 18px 24px; }
+.side-front .barcode { width: 76%; flex: none; margin-top: auto; position: relative; overflow: hidden; }
+.side-front .barcode::after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 3px; background: var(--coral); box-shadow: 0 0 8px 2px rgba(224, 112, 95, .55); animation: scan 2.4s ease-in-out infinite alternate; }
+@keyframes scan { to { left: calc(100% - 3px); } }
+@keyframes beltx { to { background-position-x: 20px; } }
+@keyframes belty { to { background-position-y: 20px; } }
+
+/* Narrow screens: the belt runs down the left side, the register waits at the bottom. */
+.checkout { position: relative; max-width: 520px; margin-inline: auto; padding-bottom: 232px; }
+.co-main { min-width: 0; }
+.team-page .team-grid { position: relative; z-index: 2; grid-template-columns: minmax(0, 1fr); gap: 28px; max-width: none; margin: 0 0 0 40px; padding-right: 12px; }
+.belt { position: absolute; z-index: 1; left: 0; top: 0; bottom: 64px; width: 62px; display: flex; flex-direction: row-reverse; }
+.belt-top { flex: 0 0 44px; border: 3px solid var(--navy); border-bottom: 0; border-radius: 22px 22px 0 0; background: repeating-linear-gradient(180deg, #3F4D70 0 16px, #2B3652 16px 20px); box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .08); animation: belty .9s linear infinite; }
+.belt-frame { flex: 1; margin-top: 16px; border: 3px solid var(--navy); border-right: 0; border-radius: 10px 0 0 10px; background: #C9CFDA; }
+.register { position: absolute; z-index: 3; left: 14px; bottom: 0; width: 170px; }
+.register svg { display: block; width: 100%; height: auto; }
+
+/* Wide screens: the belt runs under the cards, the register stands at the far right. */
+@media (min-width: 1240px) {
+  .checkout { display: grid; grid-template-columns: minmax(0, 1fr) 170px; align-items: end; max-width: none; padding-bottom: 0; }
+  .team-page .team-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; margin: 0; padding-right: 16px; }
+  .belt { position: relative; left: auto; top: auto; bottom: auto; width: auto; height: 64px; margin-top: -20px; display: block; }
+  .belt-top { height: 44px; border: 3px solid var(--navy); border-right: 0; border-radius: 22px 0 0 22px; background: repeating-linear-gradient(90deg, #3F4D70 0 16px, #2B3652 16px 20px); animation: beltx .9s linear infinite; }
+  .belt-frame { height: 20px; margin: 0 0 0 18px; border: 3px solid var(--navy); border-top: 0; border-radius: 0 0 10px 10px; background: #C9CFDA; }
+  .register { position: relative; left: auto; bottom: auto; margin-left: -3px; }
+}
+@media (prefers-reduced-motion: reduce) { .belt-top, .side-front .barcode::after { animation: none; } }
+.team-page .side-front .role { min-height: 2.6em; display: flex; align-items: center; justify-content: center; }
